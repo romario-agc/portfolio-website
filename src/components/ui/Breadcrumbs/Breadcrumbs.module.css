@@ -1,0 +1,98 @@
+/* Breadcrumbs — horizontal padding mirrors .rgrid exactly.
+   Breadcrumbs sit inside .main-content, so they align with page titles.
+   
+   CRITICAL: On mobile (≤768px), globals.css sets .rgrid { padding: 0 !important }
+   and .main-content { padding-left: 16px }. So .bar must also be padding: 0
+   to let .main-content provide the sole horizontal offset.
+   
+   The mobile rule MUST come last to override the min-width:768 rule at 768px. */
+.bar {
+  max-width: var(--content-max-w);
+  margin: 0 auto;
+  width: 100%;
+  padding: 12px 16px;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.item { display: flex; align-items: center; }
+
+.sep {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--border);
+  margin: 0 6px;
+}
+
+.link {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.link:hover { color: var(--accent); }
+
+.current {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ═══ Desktop / Tablet (ascending min-width) ═══ */
+
+@media (min-width: 768px) {
+  .bar { padding: 10px clamp(24px, 4vw, 48px); }
+  .link, .current { font-size: 10px; }
+  .sep { margin: 0 5px; }
+}
+
+@media (min-width: 1024px) {
+  .bar { padding: 10px clamp(24px, 4vw, 64px); }
+  .link, .current { font-size: 11px; }
+}
+
+@media (min-width: 1440px) {
+  .bar { padding: 10px 64px; }
+}
+
+@media (min-width: 1536px) {
+  .bar { padding: 10px clamp(64px, 5vw, 96px); }
+}
+
+@media (min-width: 1920px) {
+  .bar { padding: 10px 64px; }
+}
+
+/* ═══ Mobile (≤768px) — MUST come last to override min-width:768 at 768px.
+   globals.css sets .rgrid { padding: 0 !important } at this breakpoint.
+   .main-content provides 16px horizontal. .bar adds 0. ═══ */
+@media (max-width: 768px) {
+  .bar { padding: 10px 0; }
+  .sep { margin: 0 4px; font-size: 9px; }
+  .link {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .current {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: rgba(0, 212, 255, 0.06);
+    color: var(--accent);
+    border: 1px solid rgba(0, 212, 255, 0.12);
+  }
+}

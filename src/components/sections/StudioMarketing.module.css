@@ -1,0 +1,86 @@
+.header { margin-bottom: 12px; }
+.headerRow { display: flex; justify-content: space-between; align-items: flex-end; }
+
+/* Section wrapper — flex column so bento fills remaining viewport */
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: var(--section-h, auto);
+  max-height: calc(100dvh - 180px);
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
+  flex: 1;
+  min-height: 200px;
+}
+
+.cell { position: relative; overflow: hidden; cursor: pointer; }
+.cellGrad { position: absolute; inset: 0; }
+.cellTall { grid-row: 1 / 3; }
+
+.cellInfo { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px; background: linear-gradient(to top, rgba(6,6,14,0.7), transparent); }
+.cellCat { font-family: var(--font-body); font-size: 10px; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 3px; }
+.cellLabel { font-family: var(--font-display); font-size: 18px; color: var(--text); }
+
+.cellInfoSm { position: absolute; bottom: 0; left: 0; right: 0; padding: 12px; background: linear-gradient(to top, rgba(6,6,14,0.6), transparent); }
+.cellCatSm { font-family: var(--font-body); font-size: 9px; color: var(--cyan); letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 2px; }
+.cellLabelSm { font-size: 14px; color: var(--text); }
+
+/* ≤1023px: swap bento → carousel. No breakout — carousel stays inside .inner.
+   overflow:hidden prevents flex min-content propagation from .track to .wrap. */
+@media (max-width: 1023px) {
+  .wrap { height: auto; max-height: none; }
+  .bento { display: none; }
+  .mobileCarousel { display: block; overflow: hidden; min-width: 0; }
+  .headerRow :global(.oval-link) { display: none; }
+}
+
+@media (max-width: 767px) {
+  .wrap { height: auto; max-height: none; }
+  .bento { display: none; }
+  .headerRow { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .headerRow :global(.oval-link) { display: none; }
+  .header { margin-bottom: 10px; }
+}
+
+/* Desktop only: hide mobile carousel */
+@media (min-width: 1024px) {
+  .mobileCarousel { display: none; }
+}
+
+/* ── View hint — zoom-plus icon on hover ── */
+.viewHint {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+
+.cell:hover .viewHint {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cell:hover .cellGrad {
+  transform: scale(1.03);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cell:active .cellGrad {
+  transform: scale(0.98);
+}

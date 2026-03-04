@@ -1,0 +1,233 @@
+/* SubNav — fixed bar below Nav chrome.
+   Desktop: horizontal pill links.
+   Mobile: horizontal scrollable chip strip (no dropdown). */
+.bar {
+  position: fixed;
+  top: calc(var(--chrome-h) - 1px);
+  left: 0;
+  right: 0;
+  height: var(--subnav-h);
+  z-index: 201;
+  background: rgba(10, 10, 20, 0.50);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  border-bottom: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  padding: 0 28px;
+  overflow: visible;
+  animation: slideDown_local 0.3s ease both;
+}
+
+@media (min-width: 1921px) {
+  .bar { left: 180px; }
+}
+
+/* ── Desktop links ── */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.navLinks > .item:first-child { margin-left: -8px; }
+
+.item {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--dim);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.25s;
+  letter-spacing: 0.03em;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.itemActive { color: var(--accent); }
+
+/* Theme-adaptive active color */
+.bar[data-theme="red"] .itemActive { color: #ff6666; }
+.bar[data-theme="purple"] .itemActive { color: var(--purple); }
+.bar[data-theme="cyan"] .itemActive { color: var(--accent); }
+
+/* ── Mobile: scrollable chip strip ── */
+.mobileStrip {
+  display: none;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  mask-image: linear-gradient(to right, black calc(100% - 24px), transparent);
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 24px), transparent);
+}
+.mobileStrip::-webkit-scrollbar { display: none; }
+
+.chipRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-right: 16px;
+}
+
+/* First chip's pill left edge aligns with back-button / logo above.
+   Full symmetric padding keeps text centered in active pill. */
+
+.chip {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--dim);
+  padding: 5px 12px;
+  border: 1px solid transparent;
+  border-radius: 100px;
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  outline: none;
+  transition: all 0.25s;
+  flex-shrink: 0;
+}
+
+.chipActive {
+  color: var(--text);
+  background: rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.2);
+}
+
+/* Theme-adaptive chips */
+.bar[data-theme="red"] .chipActive {
+  color: #ff6666;
+  background: rgba(255, 102, 102, 0.08);
+  border-color: rgba(255, 102, 102, 0.2);
+}
+.bar[data-theme="purple"] .chipActive {
+  color: var(--purple);
+  background: rgba(168, 85, 247, 0.08);
+  border-color: rgba(168, 85, 247, 0.2);
+}
+
+/* Old mobile nav — kept for reference but hidden */
+.mobileNav { display: none; }
+
+/* ── Responsive switch ── */
+/* Tablet + mobile: use chip strip instead of text links */
+/* ═══ Compact desktop (1024–1280px) — matches Nav 20px ═══ */
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .bar { padding: 0 20px; }
+  .item { font-size: 10px; padding: 3px 6px; }
+  .navLinks > .item:first-child { margin-left: -6px; }
+}
+
+@media (max-width: 1023px) {
+  .navLinks { display: none; }
+  .mobileStrip { display: flex; }
+}
+
+@media (max-width: 767px) {
+  .bar { padding: 0 0 0 16px; gap: 0; }
+  .blogControls { display: none; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .bar { padding: 0 0 0 24px; }
+}
+
+/* Homepage subnav: hide at ultrawide (sidebar dots visible) */
+.homeOnly {}
+@media (min-width: 1921px) { .homeOnly { display: none; } }
+
+/* ── Blog controls ── */
+.blogControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.blogSearch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  max-width: 200px;
+}
+
+.blogSearchInput {
+  border: none;
+  background: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--text);
+  width: 100%;
+}
+.blogSearchInput::placeholder { color: var(--dim); }
+
+.blogSortBtns { display: flex; gap: 2px; }
+
+.blogSortBtn {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.blogSortActive {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border);
+}
+
+@keyframes slideDown_local {
+  from { opacity: 0; transform: translateY(-100%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Blog TOC mode ── */
+.tocMode .navLinks { overflow-x: auto; scrollbar-width: none; }
+.tocMode .navLinks::-webkit-scrollbar { display: none; }
+
+.tocTag {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-right: 8px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.tocTagMobile {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  margin-right: 6px;
+  flex-shrink: 0;
+}

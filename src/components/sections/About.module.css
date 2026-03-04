@@ -1,0 +1,56 @@
+.section { display: grid; grid-template-columns: 4fr 8fr; gap: 24px; }
+.left { display: flex; flex-direction: column; align-items: center; padding-right: 24px; }
+.right { align-self: center; padding-left: 24px; }
+
+.photoWrap { width: 100%; margin-bottom: 14px; }
+.photoPlaceholder {
+  width: 100%;
+  aspect-ratio: 1 / 1.1;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: linear-gradient(145deg, rgba(0,212,255,0.04), var(--bg-alt));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photoInitial {
+  font-family: var(--font-heading);
+  font-size: 48px;
+  font-weight: 800;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.3;
+}
+
+.stats { display: flex; gap: 20px; justify-content: center; width: 100%; }
+.stat { text-align: center; }
+.statNum { font-family: var(--font-heading); font-size: 18px; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.statLabel { font-family: var(--font-body); font-size: 7px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+
+.social { display: flex; gap: 14px; justify-content: center; margin-top: 12px; }
+.socialLink { color: var(--dim); text-decoration: none; transition: color var(--dur-fast); display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; }
+.socialLink:hover { color: var(--cyan); background: rgba(0, 212, 255, 0.06); }
+
+/* Tablet + mobile: floating CTA replaces section oval-link */
+@media (max-width: 1023px) {
+  .section :global(.oval-link) { display: none; }
+}
+
+@media (max-width: 767px) {
+  .section { grid-template-columns: 1fr; gap: 16px; }
+  .left { padding-right: 0; max-width: none; margin: 0; flex-direction: row; align-items: flex-start; gap: 16px; }
+  .photoWrap { width: 80px; margin-bottom: 0; flex-shrink: 0; }
+  .photoPlaceholder { aspect-ratio: 1; }
+  .photoInitial { font-size: 28px; }
+  .stats { justify-content: flex-start; flex-wrap: wrap; gap: 12px; }
+  .social { justify-content: flex-start; margin-top: 8px; }
+  .right { padding-left: 0; }
+}
+
+/* ═══ Tablet (769–1024px) — photo sidebar + bio ═══ */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .section { grid-template-columns: auto 1fr !important; gap: 16px; }
+  .left { max-width: 140px; align-items: flex-start; padding-right: 0; }
+  .right { padding-left: 0; }
+}

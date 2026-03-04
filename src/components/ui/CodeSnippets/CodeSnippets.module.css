@@ -1,0 +1,160 @@
+/* CodeSnippets — expandable framework code examples */
+
+.wrap {
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.header {
+  padding: 20px 22px 0;
+}
+
+.titleRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.title {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.desc {
+  font-family: var(--font-reading);
+  font-size: 13px;
+  color: var(--desc);
+  line-height: 1.5;
+}
+
+/* ── Framework tabs ── */
+.tabs {
+  display: flex;
+  gap: 0;
+  padding: 16px 22px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.tab {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 8px 16px;
+  color: var(--dim);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  outline: none;
+  margin-bottom: -1px;
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tabActive {
+  color: var(--cyan);
+  border-bottom-color: var(--cyan);
+}
+
+/* ── Code block ── */
+.codeBlock {
+  position: relative;
+}
+
+.codeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 22px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--border);
+}
+
+.filename {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.lang {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.codeBody {
+  padding: 14px 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.codeLine {
+  display: flex;
+  padding: 0 22px;
+  line-height: 1.7;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.codeLine:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.lineNum {
+  width: 32px;
+  flex-shrink: 0;
+  color: var(--dim);
+  opacity: 0.4;
+  user-select: none;
+  text-align: right;
+  padding-right: 16px;
+}
+
+.lineText {
+  color: var(--desc);
+  white-space: pre;
+}
+
+/* Syntax colors */
+.keyword { color: var(--purple); }
+.string { color: var(--success); }
+.comment { color: var(--dim); font-style: italic; }
+
+/* ── Expand/collapse ── */
+.expandBtn {
+  display: block;
+  width: 100%;
+  padding: 10px 22px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--cyan);
+  background: rgba(0, 212, 255, 0.03);
+  border: none;
+  border-top: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s;
+  outline: none;
+  text-align: center;
+}
+
+.expandBtn:hover {
+  background: rgba(0, 212, 255, 0.06);
+}
+
+@media (max-width: 767px) {
+  .tabs { overflow-x: auto; scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+}

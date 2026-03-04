@@ -1,0 +1,58 @@
+/* Photoshoots page */
+.filterLabel {
+  font-family: var(--font-body); font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--dim); margin-right: 8px;
+}
+
+.tagBtn {
+  font-family: var(--font-body); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--dim); background: none; border: 1px solid transparent; border-radius: 6px;
+  padding: 6px 14px; cursor: pointer; transition: all 0.2s;
+}
+.tagActive { color: var(--text); background: var(--surface); border-color: var(--border); }
+
+.albumCard {
+  border-radius: 0; border: 1px solid var(--border); display: flex; align-items: flex-end;
+  padding: 20px; position: relative; overflow: hidden; cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.albumCard:hover { border-color: var(--border-hover); box-shadow: 0 12px 40px rgba(0, 212, 255, 0.08); }
+
+.albumContent { position: relative; z-index: 1; }
+.albumCat { font-family: var(--font-body); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 4px; }
+.albumTitle { font-family: var(--font-display); font-size: 22px; color: var(--text); margin-bottom: 4px; }
+.albumMeta { font-family: var(--font-body); font-size: 11px; color: var(--dim); }
+
+.albumBadge {
+  position: absolute; top: 14px; right: 14px; background: rgba(0, 0, 0, 0.5);
+  border-radius: 20px; padding: 4px 10px; font-family: var(--font-body); font-size: 10px; color: var(--text);
+}
+
+@media (max-width: 767px) {
+  .albumCard { height: 260px !important; }
+}
+
+/* Waterfall entry for album cards */
+.albumCard {
+  animation: fadeUp_local 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.albumCard:nth-child(1) { animation-delay: 0.09s; }
+.albumCard:nth-child(2) { animation-delay: 0.18s; }
+.albumCard:nth-child(3) { animation-delay: 0.27s; }
+.albumCard:nth-child(4) { animation-delay: 0.36s; }
+.albumCard:nth-child(5) { animation-delay: 0.45s; }
+.albumCard:nth-child(6) { animation-delay: 0.54s; }
+
+@keyframes fadeUp_local {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile album strip — swap grid for strip */
+.mobileStrip { display: none; }
+.desktopGrid { display: grid; }
+
+@media (max-width: 767px) {
+  .desktopGrid { display: none !important; }
+  .mobileStrip { display: block; }
+}

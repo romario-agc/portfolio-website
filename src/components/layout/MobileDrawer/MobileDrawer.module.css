@@ -1,0 +1,171 @@
+/* MobileDrawer — full-screen overlay with curtain reveal.
+   Overlay starts below UC bar so the red banner stays visible.
+   No close button — hamburger X handles toggle. */
+
+/* ── Overlay — below UC bar ── */
+.overlay {
+  position: fixed;
+  top: var(--uc-bar-h, 32px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+/* Backdrop */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Phase: entering */
+.entering .backdrop { animation: fadeIn 0.25s ease both; }
+.entering .drawer { animation: curtainDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.entering .itemGroup { animation: itemSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* Phase: open */
+.open .backdrop { opacity: 1; }
+.open .drawer { opacity: 1; }
+
+/* Phase: exiting */
+.exiting .backdrop { animation: fadeOut 0.3s ease 0.05s both; }
+.exiting .drawer { animation: curtainUp 0.25s cubic-bezier(0.4, 0, 1, 1) both; }
+
+/* ── Drawer panel ── */
+.drawer {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 8, 18, 0.98);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── Items ── */
+.items {
+  flex: 1;
+  padding: calc(var(--nav-h, 68px) + 8px) 20px 24px;
+}
+
+.itemGroup {
+  border-bottom: 1px solid var(--divider);
+}
+
+.itemLink {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 14px 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--desc);
+  text-decoration: none;
+  transition: color 0.2s;
+  width: 100%;
+}
+.itemLink:active { color: var(--text); }
+.itemActive { color: var(--text); font-weight: 600; }
+.itemGreen { color: var(--success); }
+
+/* Accordion header */
+.accordionHeader {
+  display: flex;
+  align-items: center;
+}
+.accordionHeader .itemLink { flex: 1; }
+
+.chevron {
+  width: 44px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--dim);
+  cursor: pointer;
+  transition: color 0.2s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+.chevronOpen { transform: rotate(180deg); color: var(--cyan); }
+
+/* Accordion body — CSS height transition */
+.accordionBody {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.accordionOpen { max-height: 400px; }
+
+.accordionInner {
+  padding: 0 0 8px 16px;
+  border-left: 2px solid var(--border);
+  margin-left: 8px;
+  margin-bottom: 4px;
+}
+
+.subLink {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: color 0.15s, background 0.15s;
+}
+.subLink:active {
+  color: var(--text);
+  background: rgba(0, 212, 255, 0.06);
+}
+
+/* ── Footer ── */
+.footer {
+  padding: 16px 20px 40px;
+  border-top: 1px solid var(--divider);
+  flex-shrink: 0;
+}
+
+.connectBtn {
+  width: 100%;
+  min-height: 52px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  padding: 14px 24px;
+  border: none;
+  border-radius: var(--radius-pill);
+  color: #06060e;
+  background: linear-gradient(135deg, #00d4ff, #a855f7);
+  cursor: pointer;
+  transition: opacity 0.25s, box-shadow 0.25s;
+}
+.connectBtn:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 24px rgba(0, 212, 255, 0.25);
+}
+
+/* ═══ KEYFRAMES ═══ */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+@keyframes curtainDown {
+  from { opacity: 0; transform: translateY(-100%); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes curtainUp {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-100%); }
+}
+
+@keyframes itemSlideIn {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}

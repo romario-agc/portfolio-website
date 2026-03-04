@@ -1,0 +1,120 @@
+/* Work index page */
+.projectSection {
+  margin-bottom: 48px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--divider);
+  scroll-margin-top: 136px;
+}
+
+.projectInfo { align-self: center; }
+
+.projectTitle {
+  font-family: var(--font-display);
+  font-size: 36px;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.projectTools {
+  font-family: var(--font-reading);
+  font-size: 14px;
+  color: var(--dim);
+  font-style: italic;
+  display: block;
+  margin-bottom: 18px;
+}
+
+.toolPills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.projectCtas {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.externalLink {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid var(--cyan);
+  transition: background 0.25s, color 0.25s, transform 0.15s;
+  text-decoration: none;
+}
+.externalLink:hover { background: rgba(0, 212, 255, 0.1); }
+
+.projectVisual { align-self: center; }
+
+@media (max-width: 1023px) {
+  .projectTitle { font-size: 28px; }
+}
+
+/* ═══ Tablet (768–1023px) ═══ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Double class for specificity over grid.css .rgrid 1fr !important */
+  .projectSection.projectSection {
+    display: grid !important;
+    grid-template-columns: 3fr 2fr !important;
+    gap: 24px !important;
+    margin-bottom: 32px;
+    padding-bottom: 28px;
+  }
+
+  .projectInfo { align-self: center; }
+
+  .projectTitle {
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+
+  .projectTools {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .toolPills {
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .projectCtas {
+    gap: 10px;
+    margin-top: 6px;
+  }
+
+  .externalLink {
+    font-size: 10px;
+    padding: 7px 16px;
+  }
+
+  .projectVisual {
+    align-self: center;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .projectSection.projectSection {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+  }
+  .projectTitle { font-size: 24px; margin-bottom: 8px; }
+  .projectTools { font-size: 12px; margin-bottom: 12px; }
+  .projectVisual { order: -1; max-width: 280px; }
+  .toolPills { gap: 6px; margin-bottom: 10px; }
+  .externalLink { font-size: 10px; padding: 7px 16px; }
+}

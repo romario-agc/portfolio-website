@@ -1,0 +1,71 @@
+/* Scroll-snap container — Implementation Plan §3.4
+   Snap type: mandatory y, proximity on mobile.
+   Section height: 100dvh minus chrome.
+   Governance: NEVER use 100vh (mobile browser bars). */
+
+.snapContainer {
+  height: calc(100dvh - var(--chrome-h));
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* Governance: scroll-padding-top required for scroll-snap with fixed chrome */
+  scroll-padding-top: 0;
+}
+
+.snapSection {
+  scroll-snap-align: start;
+  min-height: calc(100dvh - var(--chrome-h));
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0;
+}
+
+.inner {
+  width: 100%;
+  padding-top: clamp(24px, 4vh, 48px);
+  padding-bottom: clamp(24px, 4vh, 48px);
+}
+
+/* Planning section — red theme bg */
+.snapSection[data-theme='planning'] {
+  background: radial-gradient(ellipse at 25% 35%, rgba(84, 18, 34, 0.4), transparent 70%);
+}
+
+/* Design System section — blue theme bg */
+.snapSection[data-theme='design-system'] {
+  background: radial-gradient(ellipse at 25% 35%, rgba(18, 36, 84, 0.3), transparent 70%);
+}
+
+/* ── Responsive: 7 breakpoints, mobile-first (governance) ── */
+
+/* Phone (<480px) */
+@media (max-width: 479px) {
+  .snapContainer { scroll-snap-type: y proximity; }
+  .snapSection { min-height: auto; padding: 40px 0; }
+}
+
+/* Tablet (480–767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+  .snapContainer { scroll-snap-type: y proximity; }
+  .snapSection { min-height: auto; padding: 48px 0; }
+}
+
+/* Tablet LG (768–1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .snapContainer { scroll-snap-type: y proximity; }
+}
+
+/* Desktop (1024–1439px) — snap mandatory (default) */
+
+/* Desktop LG (1440–1535px) — content max-width reached */
+
+/* Laptop XL (1536–1919px) — common laptop */
+
+/* Widescreen (1920+) — sidebar visible, offset content */
+@media (min-width: 1920px) {
+  .snapContainer {
+    margin-left: var(--sb-width);
+  }
+}

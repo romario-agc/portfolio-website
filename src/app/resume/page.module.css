@@ -1,0 +1,235 @@
+/* Resume page — mobile-first responsive overrides */
+
+/* Header */
+.header {
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.headerName {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.headerTitle {
+  font-family: var(--font-body);
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  color: var(--cyan);
+  display: block;
+  margin-bottom: 14px;
+}
+
+.headerActions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+.downloadBtn {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 8px 20px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+/* 3-column grid */
+.grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 4vw, 64px);
+  display: grid;
+  grid-template-columns: fit-content(180px) 1fr fit-content(200px);
+  column-gap: 48px;
+}
+
+.stickyCol {
+  position: sticky;
+  top: 88px;
+  align-self: start;
+}
+
+/* Section labels */
+.sectionLabel {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+/* Company header */
+.companyName {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--cyan);
+}
+
+.roleHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.roleTitle {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.rolePeriod {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--dim);
+  flex-shrink: 0;
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ═══ Mobile ═══ */
+@media (max-width: 767px) {
+  .headerTop {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .headerName {
+    font-size: 32px;
+    margin-bottom: 6px;
+  }
+
+  .headerTitle {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .headerActions {
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .downloadBtn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .grid {
+    grid-template-columns: 1fr !important;
+    column-gap: 0;
+    row-gap: 32px;
+    padding: 0 16px;
+  }
+
+  .stickyCol {
+    position: static !important;
+  }
+
+  /* Skills — horizontal 2-col on mobile */
+  .skillsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .roleHeader {
+    flex-direction: column;
+    gap: 2px;
+    align-items: flex-start;
+  }
+
+  .rolePeriod {
+    margin-left: 0;
+    font-size: 12px;
+  }
+
+  .companyName {
+    font-size: 18px;
+  }
+
+  .roleTitle {
+    font-size: 16px;
+  }
+
+  /* Right column — 2-col grid for contact/edu/certs */
+  .rightGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}
+
+/* ═══ Tablet ═══ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .headerName { font-size: 40px; }
+
+  .grid {
+    grid-template-columns: 1fr !important;
+    column-gap: 0;
+    row-gap: 32px;
+    padding: 0 24px;
+  }
+
+  .stickyCol {
+    position: static !important;
+  }
+
+  .skillsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .rightGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
+
+/* SubNav scroll targets */
+#resume-skills,
+#resume-experience,
+#resume-contact,
+#resume-education {
+  scroll-margin-top: 140px;
+}
+
+@media (max-width: 767px) {
+  #resume-skills,
+  #resume-experience,
+  #resume-contact,
+  #resume-education {
+    scroll-margin-top: 100px;
+  }
+}

@@ -1,0 +1,107 @@
+.header { margin-bottom: 16px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card {
+  padding: 0 !important;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.preview {
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.screenPair {
+  display: flex;
+  gap: 8px;
+  padding: 16px;
+}
+
+.screen {
+  width: 100px;
+  height: 200px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screenLabel {
+  font-family: var(--font-body);
+  font-size: 8px;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.body {
+  padding: 16px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.cardDesc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--desc);
+  flex: 1;
+}
+
+@media (max-width: 1023px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+  .cta { display: none; }
+}
+
+.cta { margin-top: 16px; }
+
+@media (max-width: 767px) {
+  .grid { grid-template-columns: 1fr; gap: 10px; }
+  .grid > :nth-child(n+4) { display: none; }
+  .header { margin-bottom: 8px; }
+
+  /* Horizontal card layout on mobile */
+  .card {
+    flex-direction: row !important;
+    height: auto;
+  }
+  .preview {
+    height: auto;
+    width: 100px;
+    min-height: 100px;
+    flex-shrink: 0;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    border-radius: 12px 0 0 12px;
+  }
+  .screenPair { display: none; }
+  .body { padding: 12px 14px; }
+  .cardTitle { font-size: 16px; margin-bottom: 4px; }
+  .cardDesc { font-size: 13px; line-height: 1.5; }
+}

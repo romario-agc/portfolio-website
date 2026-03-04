@@ -1,0 +1,57 @@
+.section { text-align: center; }
+.header { margin-bottom: 24px; }
+
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: left; }
+.col {}
+
+.preview {
+  height: 180px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 14px;
+  position: relative;
+  border-radius: 12px 12px 0 0;
+}
+.previewCat { position: absolute; bottom: 12px; left: 16px; font-family: var(--font-body); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; }
+
+.body { padding: 16px 16px 20px; }
+.title { font-family: var(--font-display); font-size: 22px; color: var(--text); margin-bottom: 8px; line-height: 1.25; display: flex; align-items: center; }
+.excerpt { font-family: var(--font-reading); font-size: 14px; line-height: 1.7; color: var(--desc); }
+
+.cta { margin-top: 32px; }
+
+/* Tablet + mobile: floating CTA replaces section CTA */
+@media (max-width: 1023px) {
+  .cta { display: none; }
+}
+
+@media (max-width: 767px) {
+  .grid { grid-template-columns: 1fr; }
+  .grid > :nth-child(n+3) { display: none; }
+  .preview { height: 120px; }
+  .title { font-size: 18px; }
+  .body { padding: 12px 14px 16px; }
+  .header { margin-bottom: 16px; }
+}
+
+/* Tablet (769–1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+  .col:last-child { display: none; }
+}
+
+.caseStudy {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin-left: 8px;
+  flex-shrink: 0;
+}

@@ -1,0 +1,35 @@
+/* UC Bar — mockup line 668
+   background:#991b1b, color:#fecaca, height:32px, font-size:11px */
+.bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--uc-bar-h);
+  z-index: var(--z-uc-bar);
+  background: #991b1b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: #fecaca;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 16px;
+}
+
+.emoji { flex-shrink: 0; }
+.label { font-weight: 600; flex-shrink: 0; }
+
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 479px) {
+  .bar { font-size: 10px; gap: 4px; }
+  .text { display: none; }
+}

@@ -1,0 +1,278 @@
+/* Methodology page — Planning & Engineering */
+
+.tags { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+
+.section {
+  margin-bottom: 48px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--divider);
+  scroll-margin-top: 136px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.sectionDesc {
+  font-family: var(--font-reading);
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--desc);
+  margin-bottom: 24px;
+}
+
+/* §1 SAFe Layers */
+.layerRow {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 24px;
+  padding: 24px;
+  border-left: 3px solid;
+}
+
+.layerMeta {}
+.layerIcon { font-family: monospace; font-size: 20px; display: block; margin-bottom: 4px; }
+.layerName { font-family: var(--font-heading); font-size: 18px; font-weight: 700; display: block; margin-bottom: 8px; }
+.layerRoles { font-family: var(--font-body); font-size: 13px; color: var(--dim); line-height: 1.7; }
+
+.layerContent {}
+.layerEvents { font-family: monospace; font-size: 13px; margin-bottom: 10px; letter-spacing: 0.02em; }
+.layerDesc { font-family: var(--font-reading); font-size: 14px; line-height: 1.8; color: var(--desc); margin-bottom: 12px; }
+
+.aiCallout {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(0, 212, 255, 0.04);
+  border: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--cyan);
+  line-height: 1.6;
+}
+
+/* §2 Engineering Phases */
+.phaseRow {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 20px;
+  padding-bottom: 28px;
+}
+
+.phaseNum { text-align: center; font-family: var(--font-heading); font-size: 28px; font-weight: 800; }
+.phaseContent {}
+.phaseName { font-family: var(--font-heading); font-size: 18px; font-weight: 700; display: block; margin-bottom: 8px; }
+.phaseDesc { font-family: var(--font-reading); font-size: 14px; line-height: 1.8; color: var(--desc); margin-bottom: 14px; }
+
+.phaseGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.deliverables {
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.cardLabel {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--dim);
+  display: block;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.delivItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 4px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.bullet { font-size: 8px; margin-top: 5px; }
+
+.aiCard {
+  padding: 14px;
+  border-radius: 10px;
+  background: rgba(0, 212, 255, 0.04);
+  border: 1px solid var(--border);
+}
+
+.aiLabel {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cyan);
+  display: block;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.aiCard p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--cyan);
+  line-height: 1.7;
+}
+
+.divider { border: none; border-top: 1px solid var(--divider); margin: 0 0 28px; }
+
+/* §3 Flow Metrics */
+.metricCard {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.metricCardTitle { font-family: var(--font-heading); font-size: 14px; font-weight: 700; display: block; margin-bottom: 14px; }
+.metricCardDesc { font-family: var(--font-reading); font-size: 15px; line-height: 1.7; color: var(--desc); margin-bottom: 14px; }
+
+.barItem { margin-bottom: 10px; }
+.barHeader { display: flex; justify-content: space-between; margin-bottom: 4px; font-family: var(--font-body); font-size: 12px; color: var(--text); }
+.barPct { font-family: monospace; font-size: 11px; color: var(--dim); }
+.barTrack { height: 8px; border-radius: 4px; background: rgba(255, 255, 255, 0.05); }
+.barFill { height: 100%; border-radius: 4px; opacity: 0.7; }
+
+.flowItem { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; }
+.flowIcon { color: var(--purple); font-size: 12px; margin-top: 2px; }
+.flowName { font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text); display: block; }
+.flowDesc { font-family: var(--font-reading); font-size: 12px; color: var(--dim); }
+
+/* §4 Cadence */
+.cadenceGrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.cadenceCol { padding: 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); display: flex; flex-direction: column; }
+.cadenceDay { font-family: var(--font-heading); font-size: 16px; font-weight: 700; display: block; margin-bottom: 4px; }
+.cadenceFreq { font-family: monospace; font-size: 10px; color: var(--dim); display: block; margin-bottom: 12px; }
+.cadenceItem { font-family: var(--font-body); font-size: 12px; color: var(--muted); padding: 5px 0; }
+.sprintItem { font-family: var(--font-body); font-size: 15px; color: var(--desc); padding: 8px 0; }
+
+/* §5 AI Agents */
+.agentRow { display: flex; gap: 20px; padding: 20px 0; }
+.agentLayer { width: 80px; flex-shrink: 0; text-align: center; }
+.agentBadge { font-family: monospace; font-size: 10px; padding: 4px 8px; border-radius: 4px; display: inline-block; background: rgba(255, 255, 255, 0.04); }
+.agentContent { flex: 1; }
+.agentName { font-family: var(--font-heading); font-size: 15px; font-weight: 700; display: block; margin-bottom: 6px; }
+.agentDesc { font-family: var(--font-reading); font-size: 13px; line-height: 1.7; color: var(--desc); margin-bottom: 10px; }
+.toolPills { display: flex; gap: 6px; flex-wrap: wrap; }
+.toolPill { font-family: monospace; font-size: 10px; color: var(--dim); background: var(--surface); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border); }
+
+/* §6 Prioritization */
+.fwName { font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.fwDesc { font-family: var(--font-reading); font-size: 15px; line-height: 1.75; color: var(--desc); }
+
+/* §8 Artifacts */
+.artifactItem {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkCyan { color: var(--cyan); font-size: 14px; }
+.checkPurple { color: var(--purple); font-size: 14px; }
+
+/* ── Responsive ── */
+@media (max-width: 1023px) {
+  .layerRow { grid-template-columns: 1fr; }
+  .phaseGrid { grid-template-columns: 1fr; }
+  .cadenceGrid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ═══ Tablet (768–1023px) ═══ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .section { margin-bottom: 36px; padding-bottom: 28px; }
+  .sectionTitle { font-size: 20px; margin-bottom: 16px; }
+  .sectionDesc { font-size: 15px; margin-bottom: 20px; }
+  .tags { gap: 8px; margin-top: 12px; }
+
+  /* §1 SAFe Layers — stacked but tighter */
+  .layerRow { padding: 18px; gap: 16px; }
+  .layerName { font-size: 16px; margin-bottom: 6px; }
+  .layerRoles { font-size: 12px; }
+  .layerEvents { font-size: 12px; }
+  .layerDesc { font-size: 13px; margin-bottom: 10px; }
+  .aiCallout { font-size: 13px; padding: 8px 12px; }
+
+  /* §2 Phases — keep number + content side-by-side */
+  .phaseRow { grid-template-columns: 48px 1fr; gap: 16px; padding-bottom: 22px; }
+  .phaseNum { font-size: 24px; }
+  .phaseName { font-size: 16px; margin-bottom: 6px; }
+  .phaseDesc { font-size: 13px; margin-bottom: 12px; }
+  .delivItem { font-size: 13px; }
+  .aiCard p { font-size: 13px; }
+
+  /* §3 Metrics — side by side still works at 768+ */
+  .metricCard { padding: 16px; }
+  .metricCardTitle { font-size: 13px; margin-bottom: 12px; }
+  .metricCardDesc { font-size: 14px; margin-bottom: 12px; }
+  .barHeader { font-size: 11px; }
+  .flowName { font-size: 12px; }
+  .flowDesc { font-size: 11px; }
+
+  /* §4 Cadence — 3 columns, tighter */
+  .cadenceCol { padding: 12px; }
+  .cadenceDay { font-size: 14px; }
+  .cadenceItem { font-size: 11px; padding: 4px 0; }
+  .sprintItem { font-size: 13px; padding: 6px 0; }
+
+  /* §5 AI Agents — horizontal but tighter */
+  .agentRow { gap: 16px; padding: 16px 0; }
+  .agentLayer { width: 64px; }
+  .agentBadge { font-size: 9px; padding: 3px 6px; }
+  .agentName { font-size: 14px; margin-bottom: 4px; }
+  .agentDesc { font-size: 12px; margin-bottom: 8px; }
+  .toolPill { font-size: 9px; padding: 2px 6px; }
+
+  /* §6 Prioritization */
+  .fwName { font-size: 15px; }
+  .fwDesc { font-size: 14px; }
+
+  /* §8 Artifacts */
+  .artifactItem { font-size: 14px; padding: 8px 0; }
+
+  /* Override grid.css 1fr collapse — keep 2-column for metrics, prioritization, artifacts.
+     Double class (.section.twoCol = 0,2,0) beats .rgrid (0,1,0) regardless of load order. */
+  .section.twoCol {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+  .section.twoCol > :global(.s12) {
+    grid-column: 1 / -1 !important;
+  }
+  .section.twoCol > :global(.s6) {
+    grid-column: span 1 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .cadenceGrid { grid-template-columns: 1fr 1fr; }
+  .phaseRow { grid-template-columns: 1fr; }
+  .agentRow { flex-direction: column; }
+  .agentLayer { width: auto; text-align: left; }
+}
+
+@media (max-width: 479px) {
+  .cadenceGrid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,118 @@
+/* ═══════════════════════════════════════════════════════════════
+   GRID SYSTEM — 12-column responsive grid
+   7 breakpoints: Phone, Tablet, Tablet LG, Desktop,
+   Desktop LG (1440), Laptop XL (1536), Widescreen (1920)
+   ═══════════════════════════════════════════════════════════════ */
+
+.rgrid {
+  max-width: var(--content-max-w);
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ── Span utilities (active at 12-col breakpoint) ── */
+.s1  { grid-column: span 1; }
+.s2  { grid-column: span 1; }
+.s3  { grid-column: span 1; }
+.s4  { grid-column: span 1; }
+.s5  { grid-column: span 1; }
+.s6  { grid-column: span 1; }
+.s7  { grid-column: span 1; }
+.s8  { grid-column: span 1; }
+.s9  { grid-column: span 1; }
+.s10 { grid-column: span 1; }
+.s11 { grid-column: span 1; }
+.s12 { grid-column: span 1; }
+
+/* ── Tablet (480px): 2 columns ── */
+@media (min-width: 480px) {
+  .rgrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0 24px;
+  }
+  .s12 { grid-column: span 2; }
+}
+
+/* ── Tablet LG (768px): 6 columns ── */
+@media (min-width: 768px) {
+  .rgrid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+    padding: 0 clamp(24px, 4vw, 48px);
+  }
+  .s1  { grid-column: span 1; }
+  .s2  { grid-column: span 1; }
+  .s3  { grid-column: span 2; }
+  .s4  { grid-column: span 2; }
+  .s5  { grid-column: span 3; }
+  .s6  { grid-column: span 3; }
+  .s7  { grid-column: span 4; }
+  .s8  { grid-column: span 4; }
+  .s9  { grid-column: span 5; }
+  .s10 { grid-column: span 5; }
+  .s11 { grid-column: span 6; }
+  .s12 { grid-column: span 6; }
+}
+
+/* ── Desktop (1024px): full 12 columns ── */
+@media (min-width: 1024px) {
+  .rgrid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    padding: 0 clamp(24px, 4vw, 64px);
+  }
+  .s1  { grid-column: span 1; }
+  .s2  { grid-column: span 2; }
+  .s3  { grid-column: span 3; }
+  .s4  { grid-column: span 4; }
+  .s5  { grid-column: span 5; }
+  .s6  { grid-column: span 6; }
+  .s7  { grid-column: span 7; }
+  .s8  { grid-column: span 8; }
+  .s9  { grid-column: span 9; }
+  .s10 { grid-column: span 10; }
+  .s11 { grid-column: span 11; }
+  .s12 { grid-column: span 12; }
+}
+
+/* ── Desktop LG (1440px): content max-width reached ── */
+@media (min-width: 1440px) {
+  .rgrid {
+    padding: 0 64px;
+  }
+}
+
+/* ── Laptop XL (1536px): centered with generous margins ── */
+@media (min-width: 1536px) {
+  .rgrid {
+    padding: 0 clamp(64px, 5vw, 96px);
+  }
+}
+
+/* ── Widescreen (1920px): sidebar offset ── */
+@media (min-width: 1920px) {
+  .rgrid {
+    padding: 0 64px;
+  }
+}
+
+/* ═══ Tablet (769–1024px) — collapse grid spans to single column ═══ */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .rgrid {
+    grid-template-columns: 1fr !important;
+  }
+  .s1, .s2, .s3, .s4, .s5, .s6, .s7, .s8, .s9, .s10, .s11, .s12 {
+    grid-column: span 1 !important;
+  }
+  .hn {
+    font-size: clamp(36px, 7vw, 56px) !important;
+  }
+  .st {
+    font-size: clamp(28px, 5vw, 42px) !important;
+  }
+}

@@ -1,0 +1,199 @@
+/* GalleryViewer — clickable grid + fullscreen lightbox */
+
+/* ── Grid ── */
+.gallery {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 8px;
+}
+
+.cell {
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 145px;
+  cursor: pointer;
+  transition: border-color 0.3s, transform 0.2s;
+  overflow: hidden;
+  padding: 12px;
+}
+.cell:hover { border-color: var(--cyan); }
+.cell:active { transform: scale(0.98); }
+
+.cellMain { grid-row: 1 / 3; min-height: 300px; }
+
+.cellLabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1023px) {
+  .gallery { grid-template-columns: 1fr 1fr; }
+  .cellMain { grid-row: auto; min-height: 200px; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gallery { gap: 6px; }
+  .cell { min-height: 130px; border-radius: 8px; }
+  .cellMain { min-height: 180px; }
+  .cellLabel { font-size: 10px; }
+  /* Lightbox: tighter arrows */
+  .mediaArea { padding: 0 60px; }
+  .arrowL { left: 12px; }
+  .arrowR { right: 12px; }
+}
+
+@media (max-width: 767px) {
+  .gallery { grid-template-columns: 1fr; gap: 6px; }
+  .cell { min-height: 140px; }
+  .cellMain { min-height: 180px; }
+}
+
+/* ── Lightbox overlay ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.3s ease both;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 6, 14, 0.9);
+}
+
+.topBar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 14px 20px;
+  flex-shrink: 0;
+}
+
+.counter {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.closeBtn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+.closeBtn:hover { background: rgba(255, 255, 255, 0.18); }
+
+.mediaArea {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 80px;
+  min-height: 0;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+  z-index: 3;
+}
+.arrow:hover { background: rgba(255, 255, 255, 0.15); }
+.arrowL { left: 16px; }
+.arrowR { right: 16px; }
+
+.mediaFrame {
+  max-width: 85%;
+  width: 100%;
+  aspect-ratio: 16/10;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mediaLabel {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.thumbStrip {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 14px 20px 24px;
+  flex-shrink: 0;
+}
+
+.thumb {
+  width: 52px;
+  height: 34px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: all 0.25s;
+  outline: none;
+}
+.thumb:hover { opacity: 0.7; }
+.thumbActive {
+  border-color: var(--cyan);
+  opacity: 1;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.2);
+}
+
+@media (max-width: 767px) {
+  .mediaArea { padding: 0; }
+  .mediaFrame { max-width: 100%; border-radius: 0; aspect-ratio: 3/4; }
+  .arrowL { left: 8px; }
+  .arrowR { right: 8px; }
+  .arrow { width: 36px; height: 36px; background: rgba(0, 0, 0, 0.45); border: none; }
+  .thumbStrip { gap: 4px; overflow-x: auto; justify-content: flex-start; scrollbar-width: none; }
+  .thumb { width: 44px; height: 30px; flex-shrink: 0; }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}

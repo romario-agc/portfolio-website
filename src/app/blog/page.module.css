@@ -1,0 +1,160 @@
+/* Blog index page */
+.controls {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  align-items: center;
+}
+
+.searchBox {
+  flex: 1;
+  max-width: 360px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.searchInput {
+  border: none;
+  background: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text);
+  width: 100%;
+}
+.searchInput::placeholder { color: var(--dim); }
+
+.sortBtns { display: flex; gap: 4px; }
+
+.sortBtn {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dim);
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.sortActive {
+  color: var(--text);
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.listLabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.postRow {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--divider);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.postCat {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.postTitle {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.postMeta {
+  text-align: right;
+  flex-shrink: 0;
+  margin-left: 32px;
+}
+
+.postDate {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--dim);
+  display: block;
+}
+
+.postReads {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--dim);
+}
+
+@media (max-width: 767px) {
+  .controls { flex-direction: column; align-items: stretch; gap: 10px; }
+  .searchBox { max-width: none; padding: 8px 14px; }
+  .searchInput { font-size: 14px; }
+  .postRow { flex-direction: column; padding-bottom: 16px; margin-bottom: 16px; }
+  .postMeta { margin-left: 0; margin-top: 6px; text-align: left; display: flex; gap: 8px; }
+  .postTitle { font-size: 18px; line-height: 1.3; }
+  .postCat { font-size: 9px; margin-bottom: 4px; }
+  .listLabel { font-size: 10px; margin-bottom: 12px; }
+  .sortBtn { font-size: 10px; padding: 5px 12px; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .postTitle { font-size: 20px; }
+  .controls { gap: 12px; }
+
+  /* Override grid.css 1fr collapse — keep featured cards 3-across.
+     Double class beats .rgrid (0,1,0) regardless of load order. */
+  .featuredGrid.featuredGrid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 16px !important;
+  }
+  .featuredGrid.featuredGrid > :first-child {
+    grid-column: 1 / -1 !important;
+  }
+
+  /* Post rows — tighter */
+  .postRow { padding-bottom: 16px; margin-bottom: 16px; }
+  .postCat { font-size: 9px; }
+  .postMeta { margin-left: 24px; }
+  .postDate { font-size: 11px; }
+  .postReads { font-size: 9px; }
+  .listLabel { font-size: 10px; margin-bottom: 12px; }
+}
+
+/* Waterfall entry for blog post cards */
+.postCard {
+  animation: fadeUp_local 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.postCard:nth-child(1) { animation-delay: 0.09s; }
+.postCard:nth-child(2) { animation-delay: 0.18s; }
+.postCard:nth-child(3) { animation-delay: 0.27s; }
+.postCard:nth-child(4) { animation-delay: 0.36s; }
+.postCard:nth-child(5) { animation-delay: 0.45s; }
+.postCard:nth-child(6) { animation-delay: 0.54s; }
+
+@keyframes fadeUp_local {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}

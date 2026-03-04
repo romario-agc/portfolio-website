@@ -1,0 +1,149 @@
+/* Connect Overlay — mockup lines 3380–3420.
+   Backdrop: overlayIn 0.3s enter, overlayOut 0.35s exit.
+   Panel: overlaySlideIn 0.4s enter, overlaySlideOut 0.35s exit. */
+
+/* ── Backdrop states ── */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: overlayIn_local 0.3s ease-out both;
+}
+
+.backdropOut {
+  composes: backdrop;
+  animation: overlayOut_local 0.35s ease-in both;
+}
+
+/* Blurred dim layer — mockup line 3383 */
+.dim {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 6, 14, 0.85);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+
+/* ── Panel states ── */
+.panel {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 24px;
+  background: var(--royal, rgba(12, 14, 28, 0.98));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px 36px;
+  animation: overlaySlideIn_local 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.panelOut {
+  composes: panel;
+  animation: overlaySlideOut_local 0.35s ease-in both;
+}
+
+/* ── Form elements — mockup exact specs ── */
+.tag {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.desc {
+  font-family: var(--font-reading);
+  font-size: 14px;
+  color: var(--desc);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field {}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--dim);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.3);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.textarea {
+  font-family: var(--font-reading);
+  resize: vertical;
+}
+
+.input:focus, .textarea:focus {
+  border-color: var(--cyan);
+}
+
+.submit {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--grad);
+  border: none;
+  border-radius: 100px;
+  padding: 14px 32px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  align-self: flex-start;
+}
+
+.submit:hover { opacity: 0.9; }
+.submit:active { transform: scale(0.97); }
+
+/* ── Keyframes ── */
+@keyframes overlayIn_local {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes overlayOut_local {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes overlaySlideIn_local {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes overlaySlideOut_local {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(10px) scale(0.98); }
+}

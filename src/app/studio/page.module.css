@@ -1,0 +1,71 @@
+/* Studio & Marketing page */
+.section { margin-bottom: 48px; padding-bottom: 36px; border-bottom: 1px solid var(--divider); scroll-margin-top: 136px; }
+.sectionTitle { font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--text); display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+.sectionDesc { font-family: var(--font-reading); font-size: 16px; line-height: 1.85; color: var(--desc); max-width: 800px; }
+
+/* Bento Grid */
+.bentoGrid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  grid-template-rows: 180px 180px;
+  gap: 3px;
+}
+
+.bentoCell { position: relative; overflow: hidden; cursor: pointer; }
+.bentoTall1 { grid-row: 1 / 3; }
+.bentoTall2 { grid-row: 1 / 3; }
+
+.bentoOverlay {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 16px;
+  background: linear-gradient(to top, rgba(6, 6, 14, 0.7), transparent);
+}
+
+.bentoCat {
+  font-family: var(--font-body); font-size: 10px; color: var(--cyan);
+  letter-spacing: 0.1em; text-transform: uppercase; display: block; margin-bottom: 3px;
+}
+.bentoLabel { font-family: var(--font-display); font-size: 18px; color: var(--text); }
+
+/* Small cells have smaller text */
+.bentoCell:not(.bentoTall1):not(.bentoTall2) .bentoOverlay { padding: 12px; }
+.bentoCell:not(.bentoTall1):not(.bentoTall2) .bentoCat { font-size: 9px; letter-spacing: 0.08em; margin-bottom: 2px; }
+.bentoCell:not(.bentoTall1):not(.bentoTall2) .bentoLabel { font-size: 14px; }
+
+/* Photo Services */
+.serviceTarget { font-family: var(--font-body); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 10px; }
+.serviceTitle { font-family: var(--font-heading); font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.serviceDesc { font-family: var(--font-reading); font-size: 15px; line-height: 1.75; color: var(--desc); margin-bottom: 14px; }
+.servicePills { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* Videography */
+.videoCard { padding: 20px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); }
+.videoTitle { font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.videoDesc { font-family: var(--font-reading); font-size: 15px; line-height: 1.75; color: var(--desc); }
+
+/* Marketing */
+.mktCat { font-family: var(--font-heading); font-size: 16px; font-weight: 700; margin-bottom: 14px; }
+.mktItem {
+  font-family: var(--font-body); font-size: 14px; color: var(--desc); padding: 8px 0;
+  display: flex; align-items: center; gap: 8px;
+}
+.mktCheck { font-size: 12px; }
+.mktNote { font-family: var(--font-body); font-size: 12px; color: var(--dim); font-style: italic; }
+
+/* Responsive */
+@media (max-width: 1023px) {
+  .bentoGrid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .bentoTall1, .bentoTall2 { grid-row: auto; min-height: 200px; }
+  .bentoCell:not(.bentoTall1):not(.bentoTall2) { min-height: 160px; }
+}
+
+
+/* Mobile album strip */
+.mobileStrip { display: none; }
+
+@media (max-width: 767px) {
+  .bentoGrid { display: none; }
+  .mobileStrip { display: block; }
+  .section { margin-bottom: 32px; padding-bottom: 24px; }
+  .sectionTitle { font-size: 20px; margin-bottom: 14px; }
+  .sectionDesc { font-size: 15px; }
+}

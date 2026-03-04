@@ -1,0 +1,59 @@
+/* Sidebar — mockup .sb (line 678)
+   Vertically centered, transparent bg, 1920px+ only.
+   Active item grows to 20px/700 with spring transition. */
+
+.sidebar {
+  display: none;
+  position: fixed;
+  top: var(--chrome-h);
+  left: 0;
+  bottom: 36px;
+  width: var(--sb-width);
+  z-index: var(--z-sidebar);
+  background: transparent;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0 0 20px;
+}
+
+@media (min-width: 1921px) {
+  .sidebar { display: flex; }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* .si — mockup line 679 */
+.item {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--dim);
+  text-decoration: none;
+  padding: 7px 0;
+  cursor: pointer;
+  border: none;
+  background: none;
+  text-align: left;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition:
+    color 0.3s,
+    font-size 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    font-weight 0.3s;
+}
+
+.item:hover {
+  color: var(--muted);
+}
+
+/* .si.a — mockup line 681 */
+.itemActive {
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 700;
+}

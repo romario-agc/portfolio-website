@@ -1,0 +1,274 @@
+.nav {
+  position: fixed;
+  top: var(--uc-bar-h);
+  left: 0;
+  right: 0;
+  height: var(--nav-h);
+  z-index: var(--z-nav);
+  background: rgba(6, 6, 14, 0.45);
+  backdrop-filter: blur(24px) saturate(1.8);
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  border-bottom: 1px solid var(--divider);
+}
+
+/* Logo — V35 changelog: display:flex, alignItems:center, height:56 */
+.logo {
+  display: flex;
+  align-items: center;
+  height: var(--nav-h);
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--text);
+  text-decoration: none;
+  margin-right: auto;
+}
+
+.logoSub {
+  color: var(--dim);
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+/* Links container — V35: gap:14, fontSize:12, letterSpacing:0.02em */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-right: 20px;
+}
+
+.linkWrap {
+  position: relative;
+}
+
+.link {
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  text-decoration: none;
+  padding: 0 4px;
+  position: relative;
+  transition: color var(--dur-fast);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.link:hover {
+  color: var(--text);
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+}
+
+.linkActive {
+  color: var(--accent) !important;
+  font-weight: 600;
+}
+
+.linkGreen {
+  color: var(--success);
+}
+
+.linkGreen:hover {
+  color: #34d399;
+}
+
+/* Dropdown — §8.4: ddIn 0.15s */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: -12px;
+  min-width: 200px;
+  padding: 8px 0;
+  background: rgba(10, 10, 20, 0.98);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  z-index: var(--z-nav);
+  animation: ddIn_local var(--dur-fast) ease both;
+}
+
+.ddItem {
+  display: block;
+  padding: 10px 18px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--desc);
+  text-decoration: none;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+
+.ddItem:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.ddOverview {
+  font-weight: 600;
+  border-bottom: 1px solid var(--divider);
+  margin-bottom: 4px;
+  padding-bottom: 10px;
+}
+
+/* Connect CTA — OvalLink spec §7.3 */
+.connectBtn {
+  font-family: var(--font-body);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 8px 20px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-pill);
+  color: var(--accent);
+  background: transparent;
+  cursor: pointer;
+  transition: background var(--dur-normal), color var(--dur-normal);
+  flex-shrink: 0;
+}
+
+.connectBtn:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+/* Hamburger — hidden on desktop, 44px touch target per Gemini §2 */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.hamburger:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 1px;
+  transition: transform var(--dur-normal) var(--ease-spring), opacity var(--dur-fast);
+  transform-origin: center;
+}
+
+/* Animated X when drawer is open */
+.hamburgerOpen span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburgerOpen span:nth-child(2) { opacity: 0; }
+.hamburgerOpen span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* When drawer is open, nav must sit above the drawer overlay (z-999)
+   so the hamburger X remains tappable */
+.navAboveDrawer { z-index: 1001; }
+
+/* ── Responsive ── */
+
+/* ═══ Compact desktop (1024–1280px) — nav items fit without overflow ═══ */
+@media (min-width: 1024px) and (max-width: 1280px) {
+  .nav { padding: 0 20px; }
+  .logo { font-size: 15px; }
+  .logoSub { margin-left: 5px; }
+  .links { gap: 4px; margin-right: 12px; }
+  .link { font-size: 11px; letter-spacing: 0.01em; padding: 0 2px; }
+  .connectCta { font-size: 9px; padding: 8px 16px; letter-spacing: 0.04em; }
+}
+
+@media (max-width: 1023px) {
+  .links { display: none; }
+  .connectBtn { display: none; }
+  .hamburger { display: flex; }
+}
+
+@keyframes ddIn_local {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SVG Chevron icon for dropdown ── */
+.chevron {
+  width: 10px;
+  height: 10px;
+  margin-left: 3px;
+  opacity: 0.5;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+
+
+/* ── Connect CTA — navigates to homepage connect section ── */
+.connectCta {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 100px;
+  color: #06060e;
+  background: linear-gradient(135deg, #00d4ff, #a855f7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.connectCta:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 24px rgba(0, 212, 255, 0.25), 0 0 8px rgba(168, 85, 247, 0.15);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1023px) {
+  .connectCta { display: none; }
+}
+
+/* ── Mobile back button ── */
+.backBtn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+.backBtn:active {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+@media (max-width: 1023px) {
+  .backBtn { display: flex; }
+}
+
+/* ── Mobile padding alignment ── */
+@media (max-width: 767px) {
+  .nav { padding: 0 16px; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .nav { padding: 0 24px; }
+}

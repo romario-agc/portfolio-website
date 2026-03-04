@@ -1,0 +1,381 @@
+/* ═══════════════════════════════════════════════════════════════
+   FONT FACES — Gilroy (local), Gilda Display (Google via next/font)
+   Place woff2 files in public/fonts/ matching these filenames.
+   ═══════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: url('/fonts/gilroy-extrabold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GLOBALS — Reset, base typography, accessibility
+   ═══════════════════════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+/* ── Accessibility: skip to content ── */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 24px;
+  background: var(--cyan);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+
+.skip-to-content:focus {
+  top: 0;
+}
+
+/* ── Focus indicator for all interactive elements ── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(0, 212, 255, 0.25);
+  color: var(--text);
+}
+
+/* ── Scrollbar styling ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Image defaults ── */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Link reset ── */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── Button reset ── */
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TYPOGRAPHY CLASSES — DS V35 §4.2
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Hero name — 80px (clamp 44–80px) */
+.hn {
+  font-family: var(--font-heading);
+  font-size: clamp(44px, 8vw, 80px);
+  font-weight: 800;
+  line-height: var(--lh-tight);
+  color: var(--text);
+}
+
+/* Section/page title — 64px standalone, 42px home */
+.st {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 400;
+  line-height: var(--lh-tight);
+  color: var(--text);
+}
+
+/* Body/description — 18px (mockup line 696 + inline fontSize:18) */
+.bs {
+  font-family: var(--font-reading);
+  font-size: 20px;
+  line-height: var(--lh-relaxed);
+  color: var(--text);
+}
+
+/* Sidebar items — 16px (WCAG minimum) */
+.si {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: var(--lh-normal);
+  color: var(--dim);
+}
+
+/* Labels/metadata — 11px uppercase */
+.lb {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPONENT PRIMITIVES — DS V35 §7
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Card — §7.4 */
+.cd {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--dur-normal), box-shadow var(--dur-normal);
+}
+
+.cd:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Pill tag — §7.5 */
+.pl {
+  font-family: var(--font-body);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  display: inline-block;
+}
+
+/* Under Construction badge — §7.6 */
+.uc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: var(--radius-pill);
+  padding: 4px 12px;
+}
+
+/* OvalLink — §7.3 */
+.oval-link {
+  font-family: var(--font-body);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 8px 20px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-pill);
+  color: var(--accent);
+  background: transparent;
+  cursor: pointer;
+  transition: background var(--dur-normal), color var(--dur-normal), transform var(--dur-fast);
+  display: inline-block;
+  text-decoration: none;
+}
+
+.oval-link:hover {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.oval-link:active {
+  transform: scale(0.97);
+}
+
+/* SectionHead — §7.1 */
+.section-head {
+  border-bottom: 1px solid var(--divider);
+  padding-bottom: var(--space-xl);
+  margin-bottom: 36px;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEME BACKGROUNDS — DS V35 §3.2
+   Fixed-position gradient layers with opacity transitions.
+   ═══════════════════════════════════════════════════════════════ */
+
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg-layers);
+  pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bg-base {
+  background: radial-gradient(ellipse at 30% 20%, #0e1020, #06060e 70%);
+  opacity: 1;
+}
+
+.bg-blue {
+  background: radial-gradient(ellipse at 25% 35%, #122454, #0c1a3d 55%, #070d1e);
+  opacity: 0;
+}
+
+.bg-red {
+  background: radial-gradient(ellipse at 25% 35%, #541222, #3d0c0c 55%, #1e0707);
+  opacity: 0;
+}
+
+[data-theme='design-system'] .bg-blue { opacity: 1; }
+[data-theme='planning'] .bg-red { opacity: 1; }
+
+/* ── Main content container ── */
+.main-content {
+  position: relative;
+  z-index: 2; /* --z-scroll-container */
+  padding-top: calc(var(--chrome-h) + 32px);
+  min-height: 100dvh;
+  padding-bottom: 60px; /* space for fixed footer */
+}
+
+/* When SubNav is rendered (#portfolio-subnav exists in DOM),
+   push content below subnav: 88px (chrome) + 36px (subnav) = 124px.
+   Mockup line 1081: paddingTop: SUBNAV_MAP ? 124 : 88.
+   CSS :has() — works SSR, no JS hydration delay. */
+/* Standalone pages with SubNav: push content below chrome + subnav + buffer.
+   Exclude homepage (data-home) — HomeViewer handles its own layout. */
+body:has(#portfolio-subnav:not([data-home])) .main-content {
+  padding-top: calc(var(--full-chrome-h) + 52px);
+}
+
+/* Scroll-margin for anchor targets — mockup uses 136px (124 + 12px buffer).
+   Ensures subnav clicks don't scroll section titles behind fixed chrome. */
+body:has(#portfolio-subnav:not([data-home])) section[id],
+body:has(#portfolio-subnav:not([data-home])) div[id] {
+  scroll-margin-top: 148px;
+}
+
+/* HomeViewer: when homepage SubNav is visible, push viewer below it */
+body:has(#portfolio-subnav) .home-page-viewer {
+  top: var(--full-chrome-h) !important;
+}
+
+/* ═══ RESPONSIVE TYPOGRAPHY — STANDALONE PAGES ═══ */
+
+/* Tablet (769–1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hn { font-size: clamp(32px, 6vw, 44px) !important; }
+  .st { font-size: clamp(26px, 4vw, 36px) !important; }
+  .bs { font-size: 16px !important; }
+  .lb { font-size: 10px !important; }
+
+  .rgrid { column-gap: 16px !important; }
+  .s6 { grid-column: span 6 !important; }
+  .s4 { grid-column: span 6 !important; }
+  .s3 { grid-column: span 6 !important; }
+
+  /* Tighter gap below SubNav on tablet */
+  body:has(#portfolio-subnav:not([data-home])) .main-content {
+    padding-top: calc(var(--full-chrome-h) + 12px) !important;
+  }
+}
+
+/* Mobile (≤768px) — Research-based mobile typography:
+   - 16px+ body prevents iOS zoom on focus
+   - 1.6-1.8 line-height for thumb-scrolling readability
+   - clamp() scales between small phones and large phones
+   - Tighter heading letter-spacing at smaller sizes
+   - 8px min touch-target padding on interactive text */
+@media (max-width: 768px) {
+  .hn { font-size: clamp(28px, 8vw, 40px) !important; line-height: 1.15 !important; letter-spacing: -0.01em !important; }
+  .st { font-size: clamp(22px, 6vw, 32px) !important; line-height: 1.2 !important; }
+  .bs { font-size: 15px !important; line-height: 1.75 !important; }
+  .lb { font-size: 9px !important; letter-spacing: 0.14em !important; }
+
+  .rgrid { column-gap: 12px !important; padding: 0 !important; }
+  .s1, .s2, .s3, .s4, .s5, .s6, .s7, .s8, .s9, .s10, .s11, .s12 {
+    grid-column: span 12 !important;
+  }
+
+  .cd { padding: 14px !important; border-radius: 10px !important; }
+  .main-content { padding-left: 16px !important; padding-right: 16px !important; }
+
+  /* Tighter gap below SubNav on mobile — breadcrumbs handles its own spacing */
+  body:has(#portfolio-subnav:not([data-home])) .main-content {
+    padding-top: var(--full-chrome-h) !important;
+  }
+  .oval-link { font-size: 11px !important; padding: 10px 20px !important; }
+
+  /* Improve text rendering on mobile */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}

@@ -1,0 +1,306 @@
+/* LiveAnimDemos — visually observable CSS animation examples */
+
+.wrap {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--divider);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.replayBtn {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  background: none;
+  border: 1px solid var(--cyan);
+  border-radius: 100px;
+  padding: 5px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  outline: none;
+}
+.replayBtn:hover {
+  background: rgba(0, 212, 255, 0.08);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.card {
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+/* ── Stage: the animation viewport ── */
+.stage {
+  height: 120px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6, 6, 14, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.info {
+  padding: 16px 18px;
+}
+
+.demoTitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.demoDesc {
+  font-family: var(--font-reading);
+  font-size: 13px;
+  color: var(--desc);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.demoTiming {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--cyan);
+  opacity: 0.7;
+}
+
+/* ═══ PULSE GLOW ═══ */
+.pulseWrap {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.pulseDot {
+  position: absolute;
+  inset: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: var(--cyan);
+  animation: pulseDotAnim 2s ease-in-out infinite;
+}
+
+.pulseRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--cyan);
+  animation: pulseRingAnim 2s ease-in-out infinite;
+}
+
+@keyframes pulseDotAnim {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; box-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }
+}
+
+@keyframes pulseRingAnim {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.8); opacity: 0; }
+}
+
+/* ═══ STAGGER WATERFALL ═══ */
+.staggerWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 80%;
+}
+
+.staggerBar {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  opacity: 0;
+  transform: translateY(16px);
+  animation: staggerEntry 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.staggerBar:nth-child(1) { width: 100%; }
+.staggerBar:nth-child(2) { width: 85%; }
+.staggerBar:nth-child(3) { width: 70%; }
+.staggerBar:nth-child(4) { width: 90%; }
+.staggerBar:nth-child(5) { width: 60%; }
+
+@keyframes staggerEntry {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══ SPRING BOUNCE ═══ */
+.springWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.springBall {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--purple);
+  animation: springBounce 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+.springShadow {
+  width: 28px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.2);
+  animation: springSquash 1.2s ease-in-out infinite;
+}
+
+@keyframes springBounce {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-36px); }
+  50% { transform: translateY(0) scaleY(0.85) scaleX(1.15); }
+  65% { transform: translateY(-12px); }
+  80% { transform: translateY(0) scaleY(0.92) scaleX(1.08); }
+}
+
+@keyframes springSquash {
+  0%, 100% { transform: scaleX(1); opacity: 0.3; }
+  30% { transform: scaleX(0.6); opacity: 0.1; }
+  50% { transform: scaleX(1.4); opacity: 0.5; }
+  80% { transform: scaleX(1.1); opacity: 0.35; }
+}
+
+/* ═══ FADE + SLIDE ═══ */
+.fadeWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 70%;
+}
+
+.fadeLine1, .fadeLine2, .fadeLine3 {
+  border-radius: 3px;
+  animation: fadeSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.fadeLine1 {
+  height: 12px;
+  width: 60%;
+  background: var(--text);
+  opacity: 0.8;
+  animation-delay: 0s;
+}
+
+.fadeLine2 {
+  height: 8px;
+  width: 100%;
+  background: var(--dim);
+  opacity: 0.4;
+  animation-delay: 0.1s;
+}
+
+.fadeLine3 {
+  height: 8px;
+  width: 80%;
+  background: var(--dim);
+  opacity: 0.3;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══ SHAPE MORPH ═══ */
+.morphWrap {
+  width: 50px;
+  height: 50px;
+}
+
+.morphShape {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  animation: morphAnim 3s ease-in-out infinite;
+}
+
+@keyframes morphAnim {
+  0% { border-radius: 10%; transform: scale(1) rotate(0deg); }
+  25% { border-radius: 50%; transform: scale(0.85) rotate(90deg); }
+  50% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: scale(1.1) rotate(180deg); }
+  75% { border-radius: 50%; transform: scale(0.9) rotate(270deg); }
+  100% { border-radius: 10%; transform: scale(1) rotate(360deg); }
+}
+
+/* ═══ SKELETON SHIMMER ═══ */
+.shimmerWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 80%;
+}
+
+.shimmerLine, .shimmerLineShort, .shimmerBlock {
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--surface) 0%, rgba(255,255,255,0.06) 50%, var(--surface) 100%);
+  background-size: 200% 100%;
+  animation: shimmerSweep 1.5s linear infinite;
+}
+
+.shimmerLine {
+  height: 10px;
+  width: 100%;
+}
+
+.shimmerLineShort {
+  height: 10px;
+  width: 65%;
+  animation-delay: 0.15s;
+}
+
+.shimmerBlock {
+  height: 32px;
+  width: 100%;
+  animation-delay: 0.3s;
+  border-radius: 6px;
+}
+
+@keyframes shimmerSweep {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1023px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 767px) {
+  .grid { grid-template-columns: 1fr; }
+}

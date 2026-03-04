@@ -1,0 +1,392 @@
+/* AlbumLightbox — enhanced with 60% dim, load/close/slide animations */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Phase animations ── */
+.entering { animation: overlayEnter 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.open { opacity: 1; }
+.exiting { animation: overlayExit 0.4s cubic-bezier(0.4, 0, 1, 1) both; }
+
+/* 85% dim backdrop — dark overlay */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 6, 14, 0.85);
+}
+
+/* Top gradient — subtle darkening for title/close contrast */
+.topGrad {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 15%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.60) 0%, rgba(0, 0, 0, 0.25) 55%, transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ── Top bar ── */
+.topBar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+  flex-shrink: 0;
+  animation: barSlideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.topLeft { display: flex; align-items: center; gap: 12px; }
+.albumTitle { font-family: var(--font-display); font-size: 22px; color: var(--text); }
+.albumCat { font-family: var(--font-body); font-size: 11px; color: var(--dim); letter-spacing: 0.06em; }
+
+.topRight { display: flex; align-items: center; gap: 16px; }
+.counter { font-family: var(--font-body); font-size: 12px; color: var(--dim); }
+
+.closeBtn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+/* ── Media area ── */
+.mediaArea {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 80px;
+  min-height: 0;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  cursor: pointer;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 3;
+}
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%) scale(1.1);
+}
+.arrowL { left: 20px; }
+.arrowR { right: 20px; }
+
+/* ── Media frame ── */
+.mediaFrame {
+  max-width: 85%;
+  max-height: 100%;
+  width: 100%;
+  aspect-ratio: 16/10;
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Outgoing image — crossfade out */
+.mediaOut {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: mediaFadeOut 0.35s cubic-bezier(0.4, 0, 1, 1) both;
+  z-index: 0;
+}
+
+/* Incoming image — slide from direction */
+.mediaSlideNext {
+  animation: mediaSlideInNext 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  z-index: 1;
+}
+.mediaSlidePrev {
+  animation: mediaSlidInPrev 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  z-index: 1;
+}
+
+/* Type badge */
+.typeBadge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 20px;
+  padding: 5px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--text);
+}
+.dur { color: var(--dim); margin-left: 2px; }
+
+/* Video play */
+.playOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.playCircle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.playCircle:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.08);
+}
+
+/* GIF loop */
+.loopBadge {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.08em;
+}
+
+/* ── Bottom bar ── */
+.bottomBar {
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+  padding: 16px 28px 24px;
+  animation: barSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.caption {
+  font-family: var(--font-reading);
+  font-size: 14px;
+  color: var(--desc);
+  text-align: center;
+  margin: 0 0 14px;
+  animation: captionFade 0.3s ease both;
+}
+
+.thumbStrip {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.thumb {
+  width: 52px;
+  height: 34px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  outline: none;
+}
+.thumb:hover {
+  opacity: 0.7;
+  transform: translateY(-2px);
+}
+.thumbActive {
+  border-color: var(--cyan);
+  opacity: 1;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.2);
+}
+
+.thumbIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  opacity: 0.7;
+}
+.thumbGif {
+  position: absolute;
+  bottom: 1px;
+  right: 2px;
+  font-size: 6px;
+  font-weight: 700;
+  color: white;
+  opacity: 0.7;
+}
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+  /* Media fills viewport width */
+  .mediaArea { padding: 0; }
+  .mediaFrame {
+    max-width: 100%;
+    border-radius: 0;
+    aspect-ratio: 3/4;
+    box-shadow: none;
+  }
+
+  /* Arrows overlay on media */
+  .arrowL { left: 8px; }
+  .arrowR { right: 8px; }
+  .arrow {
+    width: 36px;
+    height: 36px;
+    background: rgba(0, 0, 0, 0.45);
+    border: none;
+  }
+
+  /* Compact top bar */
+  .topBar { padding: 10px 16px; }
+  .albumTitle { font-size: 16px; }
+  .albumCat { font-size: 10px; }
+  .topLeft { gap: 8px; }
+  .topRight { gap: 10px; }
+  .counter { font-size: 11px; }
+  .closeBtn { width: 32px; height: 32px; }
+
+  /* Compact bottom */
+  .bottomBar { padding: 10px 16px 20px; }
+  .caption { font-size: 13px; margin-bottom: 10px; }
+  .thumbStrip { gap: 4px; overflow-x: auto; justify-content: flex-start; scrollbar-width: none; padding-bottom: 2px; }
+  .thumbStrip::-webkit-scrollbar { display: none; }
+  .thumb { width: 44px; height: 30px; flex-shrink: 0; }
+
+  /* Type badge smaller */
+  .typeBadge { top: 10px; left: 10px; font-size: 10px; padding: 4px 10px; }
+  .playCircle { width: 52px; height: 52px; }
+  .loopBadge { bottom: 10px; right: 10px; font-size: 9px; }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mediaArea { padding: 0 60px; }
+  .mediaFrame { max-width: 90%; }
+}
+
+/* ═══ KEYFRAMES ═══ */
+
+/* Overlay entrance — fade + slight scale */
+@keyframes overlayEnter {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Overlay exit — fade out (bars handle their own reverse) */
+@keyframes overlayExit {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Top bar slides down on enter */
+@keyframes barSlideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Top bar slides back up on exit (reverse of entrance) */
+@keyframes barSlideUp_exit {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Bottom bar slides up on enter */
+@keyframes barSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Bottom bar slides back down on exit (reverse of entrance) */
+@keyframes barSlideDown_exit {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(20px); }
+}
+
+/* Media frame scales down on exit (reverse of entrance) */
+@keyframes mediaScaleOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.92); }
+}
+
+/* ── Exit overrides — reverse each element's entrance ── */
+.exiting .topBar {
+  animation: barSlideUp_exit 0.35s cubic-bezier(0.4, 0, 1, 1) both !important;
+}
+.exiting .bottomBar {
+  animation: barSlideDown_exit 0.35s cubic-bezier(0.4, 0, 1, 1) both !important;
+}
+.exiting .mediaFrame {
+  animation: mediaScaleOut 0.35s cubic-bezier(0.4, 0, 1, 1) both !important;
+}
+.exiting .topGrad {
+  animation: barSlideUp_exit 0.3s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+/* Media slide in from right (next) */
+@keyframes mediaSlideInNext {
+  from { opacity: 0; transform: translateX(60px) scale(0.95); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* Media slide in from left (prev) */
+@keyframes mediaSlidInPrev {
+  from { opacity: 0; transform: translateX(-60px) scale(0.95); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* Outgoing media fades + scales down */
+@keyframes mediaFadeOut {
+  from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+}
+
+/* Caption crossfade */
+@keyframes captionFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

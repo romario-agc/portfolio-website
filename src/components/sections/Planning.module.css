@@ -1,0 +1,86 @@
+.section {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.left, .right { display: flex; flex-direction: column; }
+
+.manifestLabel {
+  font-family: var(--font-body);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c09090;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.manifestSvg { width: 100%; margin-bottom: 12px; }
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 24px;
+  row-gap: 10px;
+}
+
+.card {
+  padding: 14px;
+  border-radius: 10px;
+  background: rgba(61, 12, 12, 0.5);
+  border: 1px solid rgba(255, 68, 68, 0.15);
+}
+
+.cardTitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.cardDesc {
+  font-family: var(--font-reading);
+  font-size: 14px;
+  color: #d4a8a8;
+}
+
+.sprintWrap { margin-top: 16px; }
+
+/* Tablet + mobile: hide oval-link (floating CTA replaces it) */
+@media (max-width: 1023px) {
+  .section :global(.oval-link) { display: none; }
+}
+
+/* ═══ Mobile ═══ */
+@media (max-width: 767px) {
+  .section.section { grid-template-columns: 1fr; gap: 16px; }
+  /* Double class for specificity over HomeViewer .inner :global(.st) */
+  .section.section :global(.st) { font-size: 28px !important; line-height: 1.15 !important; margin-bottom: 10px !important; }
+  .section.section :global(.bs) { font-size: 15px !important; line-height: 1.65 !important; }
+  .section.section :global(.lb) { font-size: 9px !important; }
+
+  .manifestLabel { font-size: 7px; margin-bottom: 6px; }
+  .manifestSvg { margin-bottom: 8px; }
+
+  .cardGrid { grid-template-columns: 1fr; gap: 8px; }
+  .card { padding: 12px; }
+  .cardTitle { font-size: 13px; }
+  .cardDesc { font-size: 13px; }
+
+  .sprintWrap { margin-top: 10px; }
+
+  .right > div:first-child { gap: 6px !important; margin-bottom: 12px !important; }
+  .right :global(.pl) { font-size: 9px !important; padding: 3px 10px !important; }
+}
+
+/* ═══ Tablet (769–1024px) ═══ */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .section { grid-template-columns: 1fr; }
+  .cardGrid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .card { padding: 12px; }
+  .cardTitle { font-size: 13px; }
+  .cardDesc { font-size: 13px; }
+}

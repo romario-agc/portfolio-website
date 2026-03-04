@@ -1,0 +1,159 @@
+/* PhotoCarousel — draggable card strip.
+   Lives INSIDE its parent container (no viewport breakout).
+   Cards sized as % of container → naturally adaptive.
+   overflow-x on track creates off-screen illusion at container edges. */
+
+.wrap {
+  margin: 0;
+  touch-action: pan-y;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.track {
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  user-select: none;
+  will-change: scroll-position;
+  min-width: 0;
+}
+.track::-webkit-scrollbar { display: none; }
+
+.card {
+  flex: 0 0 88%;
+  aspect-ratio: 3 / 4;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  scroll-snap-align: start;
+}
+
+.cardOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(6, 6, 14, 0.85) 0%, rgba(6, 6, 14, 0.4) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cat {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.label {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.meta {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--dim);
+  margin-top: 4px;
+}
+
+.count {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.endSpacer {
+  flex: 0 0 12%;
+}
+
+/* Progress bar */
+.progressWrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0 0;
+}
+
+.progressTrack {
+  flex: 1;
+  height: 2px;
+  background: var(--divider);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 1px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.progressLabel {
+  font-family: var(--font-body);
+  font-size: 10px;
+  color: var(--dim);
+  flex-shrink: 0;
+}
+
+/* ═══ Large mobile (524–767px) ═══
+   Container 478–721px wide. Portrait 3:4 cards would be 561–767px tall,
+   overflowing the viewport. Switch to landscape 16:10 like tablet.
+   70% of 478 = 335px wide → 209px tall (max: 315px at 767px). */
+@media (min-width: 524px) and (max-width: 767px) {
+  .card {
+    flex: 0 0 70%;
+    aspect-ratio: 16 / 10;
+  }
+  .endSpacer { flex: 0 0 30%; }
+  .label { font-size: 20px; }
+  .cardOverlay { padding: 16px; }
+}
+
+/* ═══ Tablet (768–1023px) ═══
+   Container is .inner (680px centered).
+   Two landscape cards visible with peek.
+   58% of 680 = 394px wide, 16:10 → 246px tall.
+   Fits comfortably in viewport. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .card {
+    flex: 0 0 58%;
+    aspect-ratio: 16 / 10;
+  }
+  .endSpacer { flex: 0 0 42%; }
+  .label { font-size: 20px; }
+  .cardOverlay { padding: 16px; }
+}
+
+/* ═══ Small mobile (≤374px) ═══
+   Tighter cards so height fits short viewports. */
+@media (max-width: 374px) {
+  .card { flex: 0 0 85%; }
+  .label { font-size: 20px; }
+  .cardOverlay { padding: 16px; }
+}

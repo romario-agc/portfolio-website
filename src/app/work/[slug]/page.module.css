@@ -1,0 +1,80 @@
+/* Case study page */
+.toolsItalic {
+  font-family: var(--font-reading);
+  font-size: 14px;
+  color: var(--dim);
+  font-style: italic;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.externalLink {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid var(--cyan);
+  transition: background 0.25s;
+  text-decoration: none;
+}
+.externalLink:hover { background: rgba(0, 212, 255, 0.1); }
+
+/* Screenshot Gallery — handled by GalleryViewer component */
+
+/* Section Labels */
+.sectionLabel {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  display: block;
+  margin-bottom: 14px;
+}
+
+/* Approach/Outcomes */
+.listItem {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-left: 12px;
+  border-left: 2px solid;
+}
+
+/* ═══ Tablet (768–1023px) ═══ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Overview: keep s8 + s4 side-by-side (5fr 3fr).
+     Double class beats grid.css .rgrid (0,1,0) regardless of load order. */
+  .overviewGrid.overviewGrid {
+    display: grid !important;
+    grid-template-columns: 5fr 3fr !important;
+    gap: 20px !important;
+  }
+
+  /* Approach + Outcomes: keep s6 + s6 side-by-side (1fr 1fr) */
+  .approachGrid.approachGrid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+  }
+
+  /* Typography */
+  .toolsItalic { font-size: 13px; }
+  .externalLink { font-size: 10px; padding: 7px 18px; }
+  .sectionLabel { font-size: 11px; margin-bottom: 12px; }
+  .listItem { margin-bottom: 10px; padding-left: 10px; }
+  .listItem p { font-size: 14px !important; line-height: 1.75 !important; }
+}
+
+/* ═══ Mobile (≤767px) ═══ */
+@media (max-width: 767px) {
+  .toolsItalic { font-size: 13px; margin-bottom: 8px; }
+  .externalLink { font-size: 10px; padding: 7px 16px; }
+  .sectionLabel { font-size: 11px; letter-spacing: 0.12em; margin-bottom: 10px; }
+  .listItem { margin-bottom: 10px; padding-left: 10px; }
+  .listItem p { font-size: 14px !important; line-height: 1.7 !important; }
+}

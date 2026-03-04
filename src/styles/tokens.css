@@ -1,0 +1,111 @@
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN TOKENS — Single source of truth
+   Extracted from homepage-mockup-v24.jsx `const t = {...}`
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Backgrounds ── */
+  --bg: #06060e;
+  --bg-alt: #0c0c18;
+  --surface: rgba(100, 200, 255, 0.04);
+  --royal: #0c1a3d;
+  --royal-light: #122454;
+  --royal-red: #3d0c0c;
+  --royal-red-light: #541222;
+
+  /* ── Text ── */
+  --text: #eaf4ff;
+  --desc: #94b8d0;
+  --muted: #7ea0ba;
+  --dim: #7a9db4;
+
+  /* ── Accents ── */
+  --cyan: #00d4ff;
+  --purple: #a855f7;
+  --red-accent: #ff4444;
+  --red-dim: #cc3333;
+  --success: #4ade80;
+  --error: #ff5a5a;
+  --glow: rgba(0, 212, 255, 0.15);
+
+  /* ── Borders ── */
+  --border: rgba(100, 200, 255, 0.12);
+  --border-hover: rgba(100, 200, 255, 0.22);
+  --divider: rgba(0, 212, 255, 0.08);
+
+  /* ── Gradients ── */
+  --grad: linear-gradient(135deg, #00d4ff, #a855f7);
+
+  /* ── Theme-switchable (overridden by data-theme) ── */
+  --accent: var(--cyan);
+  --accent-dim: var(--purple);
+
+  /* ── Layout constants ── */
+  --uc-bar-h: 32px;
+  --nav-h: 68px;
+  --chrome-h: 100px;
+  --subnav-h: 36px;
+  --full-chrome-h: 136px;
+  --sb-width: 180px;
+  --viewport-h: 100dvh;
+  --content-max-w: 1440px;
+
+  /* ── Font stacks ── */
+  --font-display: var(--font-gilda), Georgia, serif;
+  --font-heading: 'Gilroy', 'Helvetica Neue', sans-serif;
+  --font-body: system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  --font-reading: Charter, 'Bitstream Charter', Georgia, serif;
+  --font-mono: 'SF Mono', SFMono-Regular, Menlo, monospace;
+
+  /* ── Line heights (§4.3) ── */
+  --lh-tight: 1.1;
+  --lh-normal: 1.6;
+  --lh-relaxed: 1.8;
+  --lh-reading: 1.9;
+
+  /* ── Spacing (§5 — base 8px) ── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 28px;
+  --space-section: 48px;
+
+  /* ── Border radius (§12 tech debt consolidation) ── */
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-pill: 100px;
+
+  /* ── Transition durations (§8.6) ── */
+  --dur-fast: 0.15s;
+  --dur-normal: 0.25s;
+  --dur-slow: 0.4s;
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Z-index layers (§6 — exact values) ── */
+  --z-bg-layers: 0;
+  --z-scroll-container: 2;
+  --z-page-content: 5;
+  --z-mob-nav: 149;
+  --z-sidebar: 150;
+  --z-subnav: 195;
+  --z-btt: 198;
+  --z-nav: 202;
+  --z-uc-bar: 201;
+  --z-album: 998;
+  --z-connect: 999;
+  --z-onboarding: 9999;
+}
+
+/* ── Red theme (Planning & Methodology) ── */
+[data-theme='planning'] {
+  --accent: var(--red-accent);
+  --accent-dim: var(--red-dim);
+}
+
+/* ── Blue theme (Design System) — default accent, distinct bg ── */
+[data-theme='design-system'] {
+  --accent: var(--cyan);
+  --accent-dim: var(--purple);
+}

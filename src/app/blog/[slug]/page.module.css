@@ -1,0 +1,384 @@
+/* Blog post — mockup lines 2534–2650 */
+
+.meta {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--dim);
+  margin-bottom: 24px;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--dim);
+}
+
+.extLink {
+  color: var(--cyan);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+.extLink:hover { text-decoration: underline; }
+
+.heroImage {
+  height: 320px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.04), var(--bg-alt));
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroImageLabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Article body */
+.articleBody {
+  font-family: var(--font-reading);
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--desc);
+}
+
+.lede {
+  margin-bottom: 24px;
+  font-size: 19px;
+  color: var(--text);
+}
+
+.articleH2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--text);
+  margin-top: 40px;
+  margin-bottom: 16px;
+  scroll-margin-top: 148px;
+}
+
+.articleP {
+  margin-bottom: 20px;
+}
+
+.inlineImage {
+  height: 240px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.03), var(--bg-alt));
+  border: 1px solid var(--border);
+  margin: 32px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blockquote {
+  border-left: 3px solid var(--cyan);
+  padding-left: 20px;
+  margin: 32px 0;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.codeBlock {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 24px 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--cyan);
+  overflow-x: auto;
+}
+
+.codeComment {
+  color: var(--dim);
+  margin-bottom: 8px;
+}
+
+/* Author card */
+.authorCard {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  margin-top: 40px;
+}
+
+.authorAvatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.12), rgba(168, 85, 247, 0.12));
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.authorName {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.authorRole {
+  font-family: var(--font-reading);
+  font-size: 14px;
+  color: var(--dim);
+}
+
+/* Prev / Next navigation */
+.prevNext {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.prevNextCard {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: border-color 0.2s;
+  display: block;
+}
+.prevNextCard:hover { border-color: var(--cyan); }
+
+.prevNextRight { text-align: right; }
+
+.prevNextLabel {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.prevNextTitle {
+  font-family: var(--font-reading);
+  font-size: 15px;
+  color: var(--text);
+}
+
+/* Tags */
+.tagRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--divider);
+}
+
+/* Sidebar cards */
+.tocCard {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  margin-bottom: 20px;
+}
+
+.tocLabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.tocItem {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--desc);
+  padding: 6px 0 6px 12px;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.tocItem:hover { color: var(--text); }
+
+.tocItemActive {
+  color: var(--text);
+  border-left-color: var(--cyan);
+}
+
+.relatedCard {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.relatedItem {
+  display: block;
+  font-family: var(--font-reading);
+  font-size: 14px;
+  color: var(--desc);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--divider);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.relatedItem:last-child { border-bottom: none; }
+.relatedItem:hover { color: var(--text); }
+
+/* ── Source link banner ── */
+.sourceBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  background: rgba(0, 212, 255, 0.04);
+  margin-bottom: 24px;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.sourceBanner:hover {
+  border-color: rgba(0, 212, 255, 0.4);
+  background: rgba(0, 212, 255, 0.08);
+}
+
+.sourceLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--cyan);
+}
+
+.sourceArrow {
+  font-size: 16px;
+  color: var(--cyan);
+  opacity: 0.6;
+}
+
+/* ── Placeholder external link ── */
+.placeholderLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--cyan);
+  text-decoration: none;
+  padding: 10px 22px;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 100px;
+  transition: all 0.2s;
+}
+.placeholderLink:hover {
+  background: rgba(0, 212, 255, 0.06);
+  border-color: rgba(0, 212, 255, 0.4);
+}
+
+/* ═══ Mobile blog layout ═══ */
+@media (max-width: 767px) {
+  .heroImage { height: 180px; margin-bottom: 20px; border-radius: 10px; }
+  .lede { font-size: 17px; margin-bottom: 20px; }
+  .articleBody { font-size: 16px; line-height: 1.85; }
+  .articleH2 { font-size: 22px; margin-top: 28px; margin-bottom: 12px; scroll-margin-top: 110px; }
+  .articleP { margin-bottom: 16px; }
+  .inlineImage { height: 160px; margin: 24px 0; border-radius: 10px; }
+  .blockquote { padding-left: 14px; margin: 24px 0; font-size: 15px; }
+  .codeBlock { padding: 14px 16px; font-size: 12px; margin: 20px 0; }
+  .authorCard { padding: 16px; margin-top: 28px; }
+  .authorAvatar { width: 44px; height: 44px; font-size: 15px; }
+  .authorName { font-size: 14px; }
+  .authorRole { font-size: 12px; }
+  .prevNext { grid-template-columns: 1fr; gap: 10px; margin-top: 24px; }
+  .prevNextCard { padding: 14px; }
+  .tagRow { margin-top: 24px; padding-top: 16px; }
+  .meta { gap: 10px; font-size: 12px; margin-bottom: 16px; }
+  .sourceBanner { padding: 10px 14px; margin-bottom: 16px; }
+  .sourceLeft { font-size: 12px; gap: 8px; }
+
+  /* Hide sidebar TOC on mobile — SubNav handles it */
+  .tocCard { display: none; }
+  .relatedCard { margin-top: 24px; }
+}
+
+/* ═══ Tablet ═══ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Override grid.css 1fr collapse — keep article + sidebar side-by-side.
+     Double class beats .rgrid (0,1,0) regardless of load order. */
+  .postLayout.postLayout {
+    display: grid !important;
+    grid-template-columns: 5fr 2fr !important;
+    gap: 20px !important;
+  }
+
+  /* Article typography — scale down */
+  .articleH2 { font-size: 24px; margin-top: 32px; margin-bottom: 12px; scroll-margin-top: 120px; }
+  .articleBody { font-size: 16px; line-height: 1.85; }
+  .lede { font-size: 17px; margin-bottom: 20px; }
+  .articleP { margin-bottom: 16px; }
+
+  /* Hero image */
+  .heroImage { height: 240px; margin-bottom: 24px; }
+  .inlineImage { height: 180px; margin: 24px 0; }
+
+  /* Meta */
+  .meta { font-size: 12px; gap: 12px; margin-bottom: 20px; }
+  .sourceBanner { padding: 12px 16px; margin-bottom: 20px; }
+  .sourceLeft { font-size: 12px; }
+
+  /* Code + quote */
+  .blockquote { margin: 24px 0; padding-left: 16px; }
+  .codeBlock { padding: 16px 20px; font-size: 12px; margin: 20px 0; }
+
+  /* Author card */
+  .authorCard { padding: 18px; margin-top: 32px; }
+  .authorAvatar { width: 48px; height: 48px; font-size: 16px; }
+  .authorName { font-size: 14px; }
+  .authorRole { font-size: 13px; }
+
+  /* Prev/Next */
+  .prevNext { gap: 12px; margin-top: 28px; }
+  .prevNextCard { padding: 16px; }
+  .prevNextTitle { font-size: 14px; }
+
+  /* Tags */
+  .tagRow { margin-top: 28px; padding-top: 16px; }
+
+  /* Sidebar — keep TOC visible on tablet, tighter */
+  .tocCard { display: block; padding: 16px; margin-bottom: 16px; }
+  .tocLabel { font-size: 10px; margin-bottom: 10px; }
+  .tocItem { font-size: 13px; padding: 5px 0 5px 10px; }
+  .relatedCard { padding: 16px; }
+  .relatedItem { font-size: 13px; padding: 6px 0; }
+}

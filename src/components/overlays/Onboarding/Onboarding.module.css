@@ -1,0 +1,158 @@
+/* Onboarding overlay — mockup lines 748–807 */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(6, 6, 14, 0.97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel {
+  max-width: 600px;
+  text-align: center;
+  padding: 0 32px;
+}
+
+/* Progress bars — mockup line 752 */
+.bars {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.bar {
+  height: 4px;
+  border-radius: 2px;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Content — mockup line 759 */
+.content {
+  animation: fadeUp_local 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.stepLabel {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: 42px;
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+.desc {
+  font-family: var(--font-reading);
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--desc);
+}
+
+.iconRow {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.iconItem {
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--desc);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Actions — mockup line 790 */
+.actions {
+  margin-top: 40px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.skip {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgba(100, 200, 255, 0.08);
+  border: 1px solid rgba(100, 200, 255, 0.15);
+  border-radius: 100px;
+  cursor: pointer;
+  padding: 10px 24px;
+  transition: all 0.25s;
+}
+
+.skip:hover {
+  background: rgba(100, 200, 255, 0.15);
+  border-color: rgba(100, 200, 255, 0.3);
+}
+
+.next {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #06060e;
+  background: linear-gradient(135deg, #00d4ff, #a855f7);
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  padding: 12px 32px;
+  font-weight: 600;
+}
+
+.explore {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #06060e;
+  background: linear-gradient(135deg, #00d4ff, #a855f7);
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  padding: 14px 40px;
+  font-weight: 700;
+}
+
+/* Keyboard hint — mockup line 802 */
+.keyHint {
+  margin-top: 32px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(234, 244, 255, 0.5);
+  letter-spacing: 0.04em;
+}
+
+.kbd {
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(100, 200, 255, 0.25);
+  background: rgba(100, 200, 255, 0.06);
+  font-size: 12px;
+  color: rgba(234, 244, 255, 0.65);
+  font-family: inherit;
+}
+
+@keyframes fadeUp_local {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}

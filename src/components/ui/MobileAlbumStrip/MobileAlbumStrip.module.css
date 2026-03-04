@@ -1,0 +1,104 @@
+/* MobileAlbumStrip — horizontal scrolling album cards with snap.
+   Only visible at ≤767px; parent hides this on larger viewports. */
+
+.wrap {
+  margin: 0 -16px;
+}
+
+.strip {
+  display: flex;
+  gap: 10px;
+  padding: 0 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.strip::-webkit-scrollbar { display: none; }
+
+.card {
+  flex: 0 0 78%;
+  min-height: 200px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: transform 0.2s;
+}
+.card:active { transform: scale(0.98); }
+
+.info {
+  padding: 14px 16px;
+  background: linear-gradient(to top, rgba(6, 6, 14, 0.8), transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cat {
+  font-family: var(--font-body);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.label {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--text);
+}
+
+.meta {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--dim);
+  margin-top: 2px;
+}
+
+.count {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Dots */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.dotActive {
+  width: 18px;
+  border-radius: 3px;
+  background: var(--accent);
+}

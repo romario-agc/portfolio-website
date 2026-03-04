@@ -1,0 +1,33 @@
+.btn {
+  position: fixed;
+  bottom: 52px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  z-index: var(--z-btt);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: border-color var(--dur-fast), color var(--dur-fast);
+  animation: fadeUp_local 0.3s ease;
+}
+
+.btn:hover {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+@keyframes fadeUp_local {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,38 @@
+.section { display: grid; grid-template-columns: 5fr 7fr; gap: 24px; align-items: start; }
+.full { grid-column: 1 / -1; }
+.left, .right { display: flex; flex-direction: column; }
+
+.hierGrid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 16px; row-gap: 12px; margin-bottom: 16px; }
+.hierCard { height: 72px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; gap: 12px; padding: 0 16px; }
+.hierIcon { font-size: 18px; opacity: 0.4; }
+.hierLabel { font-family: var(--font-heading); font-size: 13px; font-weight: 700; display: block; color: var(--text); }
+.hierSub { font-family: var(--font-body); font-size: 8px; letter-spacing: 0.06em; color: var(--dim); text-transform: uppercase; }
+
+.sectionLabel { font-family: var(--font-body); font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); display: block; margin-bottom: 8px; }
+
+.swatchSection { margin-bottom: 12px; }
+.swatches { display: flex; gap: 6px; }
+.swatch { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.swatchColor { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border); }
+.swatchName { font-family: var(--font-body); font-size: 6px; color: var(--dim); letter-spacing: 0.04em; }
+
+.typeSection { margin-bottom: 12px; }
+.typeScale { display: flex; gap: 16px; align-items: baseline; }
+
+.components { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.searchInput { height: 30px; width: 120px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; padding: 0 10px; }
+.searchText { font-family: var(--font-body); font-size: 10px; color: var(--dim); }
+
+/* Tablet + mobile: floating CTA replaces section oval-link */
+@media (max-width: 1023px) {
+  .section :global(.oval-link) { display: none; }
+}
+
+@media (max-width: 767px) {
+  .section { grid-template-columns: 1fr; }
+}
+
+/* Tablet (769–1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .section { grid-template-columns: 1fr; }
+}
