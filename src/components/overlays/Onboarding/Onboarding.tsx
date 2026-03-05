@@ -1,9 +1,12 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { usePathname } from 'next/navigation';
 import { createPortal } from 'react-dom';
 import { useFocusTrap } from '@/lib/hooks/useFocusTrap';
 import styles from './Onboarding.module.css';
+
+const STORAGE_KEY = 'portfolio-onboarding-dismissed';
 
 /** Mockup line 748–807: four steps, progress bars, keyboard hint. */
 const STEPS = [
@@ -36,17 +39,36 @@ const STEPS = [
 ];
 
 export function Onboarding() {
+  const pathname = usePathname();
   const [step, setStep] = useState(0);
   const [exiting, setExiting] = useState(false);
-  const [dismissed, setDismissed] = useState(false);
+  const [dismissed, setDismissed] = useState(true); // default true — only show after mount check
   const [mounted, setMounted] = useState(false);
   const panelRef = useFocusTrap(!dismissed);
 
-  useEffect(() => { setMounted(true); }, []);
+  // Check localStorage on mount — only show if not previously dismissed AND on homepage
+  useEffect(() => {
+    setMounted(true);
+    try {
+      const wasDismissed = localStorage.getItem(STORAGE_KEY);
+      if (!wasDismissed && pathname === '/') {
+        setDismissed(false);
+      }
+    } catch {
+      // localStorage unavailable (SSR, private browsing) — don't show
+    }
+  }, [pathname]);
 
   const dismiss = useCallback(() => {
     setExiting(true);
-    setTimeout(() => setDismissed(true), 450);
+    setTimeout(() => {
+      setDismissed(true);
+      try {
+        localStorage.setItem(STORAGE_KEY, 'true');
+      } catch {
+        // localStorage unavailable — dismissal won't persist but UI still works
+      }
+    }, 450);
   }, []);
 
   const advance = useCallback(() => {
@@ -64,7 +86,8 @@ export function Onboarding() {
     return () => document.removeEventListener('keydown', onKey);
   }, [dismissed, dismiss, advance]);
 
-  if (dismissed || !mounted) return null;
+  // Don't render if dismissed, not mounted, or not on homepage
+  if (dismissed || !mounted || pathname !== '/') return null;
 
   const current = STEPS[step];
 
