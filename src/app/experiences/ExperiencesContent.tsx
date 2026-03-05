@@ -3,16 +3,16 @@
 import { useState } from 'react';
 import { stg } from '@/lib/stg';
 import {
-  EXPERIENCE_TABS, EXPERIENCE_DATA, JOURNEY_STAGES, JOURNEY_STAGE_COLORS,
+  EXP_TABS, EXP_DATA, JOURNEY_STAGES, JOURNEY_COLORS,
   JOURNEY_ACTIONS, JOURNEY_TOUCHPOINTS, JOURNEY_EMOTIONS, JOURNEY_PAIN_POINTS,
   DESIGN_OPPORTUNITIES, PERSONAS,
-  type ExperienceTab,
+  type ExpTab,
 } from '@/data/experiences';
 import styles from './page.module.css';
 
 export function ExperiencesContent() {
-  const [tab, setTab] = useState<ExperienceTab>('explore');
-  const data = EXPERIENCE_DATA[tab];
+  const [tab, setTab] = useState<ExpTab>('explore');
+  const data = EXP_DATA[tab];
 
   return (
     <>
@@ -21,7 +21,7 @@ export function ExperiencesContent() {
         <div className="s12">
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 32, color: 'var(--text)', marginBottom: 20 }}>Experiences</h2>
           <div className={styles.tabs}>
-            {EXPERIENCE_TABS.map((t) => (
+            {EXP_TABS.map((t) => (
               <button key={t} onClick={() => setTab(t)} className={`${styles.tab} ${tab === t ? styles.tabActive : ''}`}>{t}</button>
             ))}
           </div>
@@ -90,8 +90,8 @@ export function ExperiencesContent() {
               {/* Header */}
               <div style={{ padding: 12 }} />
               {JOURNEY_STAGES.map((stage, i) => (
-                <div key={i} className={styles.journeyHeader} style={{ borderBottomColor: JOURNEY_STAGE_COLORS[i], borderRadius: i === 0 ? '8px 0 0 0' : i === 4 ? '0 8px 0 0' : '0' }}>
-                  <span className={styles.journeyHeaderLabel} style={{ color: JOURNEY_STAGE_COLORS[i] }}>{stage}</span>
+                <div key={i} className={styles.journeyHeader} style={{ borderBottomColor: JOURNEY_COLORS[i], borderRadius: i === 0 ? '8px 0 0 0' : i === 4 ? '0 8px 0 0' : '0' }}>
+                  <span className={styles.journeyHeaderLabel} style={{ color: JOURNEY_COLORS[i] }}>{stage}</span>
                 </div>
               ))}
               {/* Actions */}

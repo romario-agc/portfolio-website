@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { useFocusTrap } from '@/lib/hooks/useFocusTrap';
 import styles from './Onboarding.module.css';
@@ -40,8 +40,7 @@ export function Onboarding() {
   const [exiting, setExiting] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const panelRef = useRef<HTMLDivElement>(null);
-  useFocusTrap(panelRef, !dismissed);
+  const panelRef = useFocusTrap(!dismissed);
 
   useEffect(() => { setMounted(true); }, []);
 

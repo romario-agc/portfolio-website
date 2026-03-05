@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState, type ReactNode, type CSSProperties } from 'react';
+import { useRef, useEffect, useState, type ReactNode, type CSSProperties, type ElementType } from 'react';
 
 interface ScrollRevealProps {
   children: ReactNode;
@@ -98,14 +98,15 @@ export function ScrollReveal({
     },
   };
 
+  const Component = Tag as ElementType;
+
   return (
-    // @ts-expect-error — dynamic tag
-    <Tag
+    <Component
       ref={ref}
       className={className}
       style={{ ...animationMap[animation], willChange: 'opacity, transform', ...style }}
     >
       {children}
-    </Tag>
+    </Component>
   );
 }

@@ -42,7 +42,7 @@ export function BlogContent() {
   return (
     <article>
       {/* Hero */}
-      <div className="rgrid" style={{ marginBottom: 48 }} {...stg(0)}>
+      <div className="rgrid" style={{ ...stg(0), marginBottom: 48 }}>
         <div className="s12" style={{ paddingBottom: 36, borderBottom: '1px solid var(--divider)' }}>
           <span className="lb" style={{ display: 'block', marginBottom: 12 }}>Thoughts</span>
           <h1 className="st" style={{ fontSize: 52, marginBottom: 14 }}>

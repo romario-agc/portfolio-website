@@ -48,6 +48,7 @@ export interface BlogPost {
   readTime?: number;
   featured: boolean;
   isReady?: boolean;
+  externalUrl?: string;
   color?: string;
 }
 

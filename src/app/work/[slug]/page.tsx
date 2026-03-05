@@ -33,7 +33,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
   return (
     <article>
-      <div className="rgrid" style={{ marginBottom: 0 }} {...stg(0)}>
+      <div id="cs-hero" className="rgrid" style={{ ...stg(0), marginBottom: 0 }}>
         <div className="s12" style={{ marginBottom: 12, textAlign: 'left' }}>
           <span className="uc-badge">🚧 Under Construction</span>
         </div>
@@ -54,7 +54,7 @@ export default async function CaseStudyPage({ params }: Props) {
       </div>
 
       {/* Screenshot Gallery — client component with lightbox */}
-      <div className="rgrid" style={{ marginBottom: 40 }} {...stg(2)}>
+      <div id="cs-gallery" className="rgrid" style={{ ...stg(2), marginBottom: 40 }}>
         <div className="s12">
           <CaseStudyGallery slug={slug} color={project.color} />
         </div>
@@ -64,7 +64,7 @@ export default async function CaseStudyPage({ params }: Props) {
       {cs && (
         <>
           <FadeUp>
-          <div className="rgrid" style={{ marginBottom: 40 }}>
+          <div id="cs-overview" className={`rgrid ${styles.overviewGrid}`} style={{ marginBottom: 40 }}>
             <div className="s8">
               <span className={styles.sectionLabel}>Overview</span>
               <p className="bs" style={{ fontSize: 17, lineHeight: 1.85, marginBottom: 24 }}>{cs.overview}</p>
@@ -86,7 +86,7 @@ export default async function CaseStudyPage({ params }: Props) {
 
           {/* Approach + Outcomes */}
           <FadeUp delay={0.1}>
-          <div className="rgrid" style={{ marginBottom: 40, paddingTop: 28, borderTop: '1px solid var(--divider)' }}>
+          <div id="cs-approach" className={`rgrid ${styles.approachGrid}`} style={{ marginBottom: 40, paddingTop: 28, borderTop: '1px solid var(--divider)' }}>
             <div className="s6">
               <span className={styles.sectionLabel} style={{ color: 'var(--cyan)' }}>Approach</span>
               {cs.approach.map((a, i) => (

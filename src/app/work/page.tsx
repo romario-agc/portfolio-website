@@ -15,7 +15,7 @@ export default function WorkPage() {
   return (
     <article>
       <div id="work-overview" />
-      <div style={{ textAlign: 'left', padding: '12px 0', marginBottom: 20 }} {...stg(0)}>
+      <div style={{ ...stg(0), textAlign: 'left', padding: '12px 0', marginBottom: 20 }}>
         <span className="uc-badge">🚧 Under Construction</span>
       </div>
       <div style={stg(1)}>

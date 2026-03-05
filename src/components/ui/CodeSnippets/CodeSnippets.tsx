@@ -89,8 +89,8 @@ function colorize(line: string) {
   const tagPattern = /(&lt;|<)\/?[A-Za-z][A-Za-z0-9.-]*/g;
 
   const parts: Array<{ text: string; type: 'kw' | 'str' | 'tag' | 'plain' }> = [];
-  let remaining = line;
-  let lastIdx = 0;
+  const remaining = line;
+  const lastIdx = 0;
 
   // Simple approach: just mark keywords and strings
   const combined = line.replace(strPattern, (m) => `§STR§${m}§/STR§`);

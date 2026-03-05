@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { useUI } from '@/components/providers/UIProvider';
 import { useFocusTrap } from '@/lib/hooks/useFocusTrap';
@@ -11,10 +11,9 @@ import styles from './ConnectOverlay.module.css';
  *  Nav morph button handles open/close (separate component). */
 export function ConnectOverlay() {
   const { overlay, closeOverlay } = useUI();
-  const panelRef = useRef<HTMLDivElement>(null);
+  const panelRef = useFocusTrap(overlay === 'connect');
   const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
   const [closing, setClosing] = useState(false);
-  useFocusTrap(panelRef, overlay === 'connect');
 
   useEffect(() => { setPortalTarget(document.getElementById('portal-root')); }, []);
 
