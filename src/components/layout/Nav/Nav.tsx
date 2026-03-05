@@ -56,7 +56,16 @@ export function Nav() {
         )}
 
         {/* Logo */}
-        <Link href="/" className={styles.logo}>
+        <Link
+          href="/"
+          className={styles.logo}
+          onClick={(e) => {
+            if (pathname === '/') {
+              e.preventDefault();
+              window.dispatchEvent(new CustomEvent('sidebar-nav', { detail: { id: 'hero' } }));
+            }
+          }}
+        >
           Romario Coffie <span className={styles.logoSub}>Portfolio</span>
         </Link>
 

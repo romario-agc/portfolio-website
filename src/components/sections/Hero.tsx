@@ -55,7 +55,11 @@ export function Hero() {
             </p>
           </div>
           <div style={stg(3)} className={styles.ctas}>
-            <Link href="/#connect" className={`oval-link ${styles.ctaGhost}`}>Get in Touch</Link>
+            <button
+              className={`oval-link ${styles.ctaGhost}`}
+              onClick={() => window.dispatchEvent(new CustomEvent('sidebar-nav', { detail: { id: 'connect' } }))}
+              type="button"
+            >Get in Touch</button>
             <Link href="/resume" className={styles.ctaResume}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{width:14,height:14}}>
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
