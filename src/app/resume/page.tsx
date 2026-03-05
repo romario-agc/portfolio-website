@@ -127,9 +127,9 @@ export default function ResumePage() {
               </div>
             </div>
 
-            {/* Portfolios */}
+            {/* Profiles */}
             <div style={{ ...stg(5), marginBottom: 36 }}>
-              <span className={styles.sectionLabel} style={{ color: 'var(--dim)' }}>🌐 Portfolios</span>
+              <span className={styles.sectionLabel} style={{ color: 'var(--dim)' }}>🌐 Profiles</span>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 <a href="https://linkedin.com/in/romariocoffie" target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--muted)', textDecoration: 'none' }}>LinkedIn</a>
                 <a href="https://dribbble.com/romariocoffie" target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'var(--font-body)', fontSize: 14, color: 'var(--muted)', textDecoration: 'none' }}>Dribbble</a>
