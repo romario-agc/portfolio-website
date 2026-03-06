@@ -28,6 +28,7 @@ const PAGE_LINKS: Record<string, { label: string; href: string }> = {
   'planning': { label: 'View Methodology', href: '/methodology' },
   'design-system': { label: 'View Design System', href: '/design-system' },
   'studio-marketing': { label: 'View Studio', href: '/studio' },
+  'about': { label: 'View Resume', href: '/resume' },
   'blog': { label: 'View All Posts', href: '/blog' },
 };
 
@@ -59,6 +60,7 @@ export function HomeViewer({ sections }: Props) {
   const [mounted, setMounted] = useState(false); // gate initial render
   const locked = useRef(false);
   const touchY = useRef(0);
+  const pageRef = useRef<HTMLDivElement>(null);
   const { setTheme } = useUI();
 
   // Delay render by one frame so fixed positioning is established before animations fire
@@ -77,6 +79,8 @@ export function HomeViewer({ sections }: Props) {
       setAnim(true);
       // Exit phase: 350ms, then swap section, enter phase: 500ms lock
       setTimeout(() => {
+        // Reset scroll position so new section always starts at top
+        if (pageRef.current) pageRef.current.scrollTop = 0;
         setIdx(target);
         setAnim(false);
         setTimeout(() => {
@@ -99,14 +103,31 @@ export function HomeViewer({ sections }: Props) {
     return () => window.removeEventListener('wheel', onWheel);
   }, [idx, go]);
 
-  // Touch navigation — mockup line 466
+  // Touch navigation — boundary-aware: only trigger page navigation when
+  // content is scrolled to top (swipe up) or bottom (swipe down).
+  // This lets content scroll freely in between without hijacking the gesture.
   useEffect(() => {
     const onStart = (e: TouchEvent) => {
       touchY.current = e.touches[0].clientY;
     };
     const onEnd = (e: TouchEvent) => {
       const dy = touchY.current - e.changedTouches[0].clientY;
-      if (Math.abs(dy) > 40) go(dy > 0 ? idx + 1 : idx - 1);
+      if (Math.abs(dy) < 40) return; // too small to be intentional
+
+      const el = pageRef.current;
+      if (!el) { go(dy > 0 ? idx + 1 : idx - 1); return; }
+
+      const atTop = el.scrollTop <= 1;
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1;
+
+      if (dy > 0 && atBottom) {
+        // Swiped up AND content is at bottom → go to next section
+        go(idx + 1);
+      } else if (dy < 0 && atTop) {
+        // Swiped down AND content is at top → go to previous section
+        go(idx - 1);
+      }
+      // Otherwise: native scroll handles the gesture (no page navigation)
     };
     window.addEventListener('touchstart', onStart, { passive: true });
     window.addEventListener('touchend', onEnd, { passive: true });
@@ -187,6 +208,7 @@ export function HomeViewer({ sections }: Props) {
     <>
       {/* Page viewport — mockup .page class (line 688) */}
       <div
+        ref={pageRef}
         className={`${styles.page} home-page-viewer`}
         style={exitStyle}
       >
@@ -224,7 +246,8 @@ export function HomeViewer({ sections }: Props) {
           href={PAGE_LINKS[pageId].href}
           className={`${styles.mobileCta} ${
             pageId === 'planning' ? styles.ctaPlanning :
-            pageId === 'design-system' ? styles.ctaPurple : ''
+            pageId === 'design-system' ? styles.ctaPurple :
+            pageId === 'about' ? styles.ctaGreen : ''
           }`}
         >
           {PAGE_LINKS[pageId].label}
